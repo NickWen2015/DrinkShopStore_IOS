@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y0E-1s-7MV">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Products-->
+        <scene sceneID="UNa-dy-hA3">
+            <objects>
+                <viewController title="Products" id="jBH-te-8Z1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9sd-g9-i8J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.21864659015170418" green="1" blue="0.82295094586131612" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="8el-EQ-XHf"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="商品頁面" image="products" selectedImage="products_selected" id="efN-ws-JcD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uQP-LG-13c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="361" y="124"/>
+        </scene>
+        <!--News-->
+        <scene sceneID="sdc-Ks-Jbq">
+            <objects>
+                <viewController title="News" id="pNk-Mf-iLW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jea-ok-rhI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9jl-eV-ao8"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="最新消息" image="news" selectedImage="news_selected" id="rQt-KO-N3W"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rOv-pW-JM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="273" y="-851"/>
+        </scene>
+        <!--Member-->
+        <scene sceneID="5Gq-RC-VF1">
+            <objects>
+                <viewController title="Member" id="zki-Uv-tSj" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vzr-3V-4pm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Lm6-QL-E6w"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="會員中心" image="member" selectedImage="member_selected" id="TnR-EM-tDh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x2B-uA-ExC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="361" y="909"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="cPj-bo-G84">
+            <objects>
+                <tabBarController id="Y0E-1s-7MV" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vlj-6H-RMH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="pNk-Mf-iLW" kind="relationship" relationship="viewControllers" id="hfp-b8-Pui"/>
+                        <segue destination="jBH-te-8Z1" kind="relationship" relationship="viewControllers" id="bWx-La-0wg"/>
+                        <segue destination="zki-Uv-tSj" kind="relationship" relationship="viewControllers" id="Ysd-43-Ecu"/>
+                        <segue destination="R68-JU-3Ea" kind="relationship" relationship="viewControllers" id="kg8-4q-LsW"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uZu-I5-3hf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1252" y="16"/>
+        </scene>
+        <!--OrderOnline-->
+        <scene sceneID="Dq5-ct-WsL">
+            <objects>
+                <viewController title="OrderOnline" id="R68-JU-3Ea" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m7n-dk-3lB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.98847224879999995" blue="0.73883648079999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="nfs-0R-fAN"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="即時訂購" image="orderonline" selectedImage="orderonline_selected" id="oga-kk-JYe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9WQ-Vh-OB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="361" y="1826"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="member" width="37.5" height="37.5"/>
+        <image name="member_selected" width="37.5" height="37.5"/>
+        <image name="news" width="37.5" height="37.5"/>
+        <image name="news_selected" width="37.5" height="37.5"/>
+        <image name="orderonline" width="37.5" height="37.5"/>
+        <image name="orderonline_selected" width="37.5" height="37.5"/>
+        <image name="products" width="37.5" height="37.5"/>
+        <image name="products_selected" width="37.5" height="37.5"/>
+    </resources>
+</document>

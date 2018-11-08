@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--訂單管理-->
+        <scene sceneID="pO0-9g-NAR">
+            <objects>
+                <navigationController storyboardIdentifier="OrderNavigationView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3hy-k7-5PA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="訂單管理" image="order" selectedImage="order_selected" id="efn-sj-DB8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m74-kK-BpC">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cLE-2z-jJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-711" y="120"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="order" width="37.5" height="37.5"/>
+        <image name="order_selected" width="37.5" height="37.5"/>
+    </resources>
+</document>

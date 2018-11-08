@@ -317,10 +317,12 @@
             </objects>
             <point key="canvasLocation" x="2028" y="-468"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--最新消息-->
         <scene sceneID="XWN-Vq-BED">
             <objects>
-                <navigationController storyboardIdentifier="ActivityView" id="BIa-3E-oq8" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ActivityNavigationView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BIa-3E-oq8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="最新消息" image="news" selectedImage="news_selected" id="fgf-bL-akA"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="56h-Ma-ZvJ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -331,10 +333,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJ2-ph-Sj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="318" y="-468"/>
+            <point key="canvasLocation" x="535" y="-468"/>
         </scene>
     </scenes>
     <resources>
+        <image name="news" width="37.5" height="37.5"/>
+        <image name="news_selected" width="37.5" height="37.5"/>
         <image name="photo-camera.png" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>

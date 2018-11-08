@@ -5,75 +5,38 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ActivityView-->
+        <!--OrderNavigationView-->
+        <scene sceneID="8Ui-le-077">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Order" referencedIdentifier="OrderNavigationView" id="JB8-P1-8f6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="JCk-Dk-Qmz"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bak-TX-ykE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1788" y="-37"/>
+        </scene>
+        <!--ActivityNavigationView-->
         <scene sceneID="f7l-gN-xvm">
             <objects>
-                <viewControllerPlaceholder storyboardName="Storyboard" referencedIdentifier="ActivityView" id="oPN-3d-LR9" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Activity" referencedIdentifier="ActivityNavigationView" id="oPN-3d-LR9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="KgF-NY-0Cv"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NqF-vM-l1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2568" y="-113"/>
+            <point key="canvasLocation" x="1797" y="-311"/>
         </scene>
-        <!--訂單管理-->
-        <scene sceneID="GVy-I5-Nt9">
+        <!--ProductNavigationView-->
+        <scene sceneID="5LE-VR-3H5">
             <objects>
-                <viewController id="0ty-zq-Dr1" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7Aa-5I-lzo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="8uW-tO-YkD"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="訂單管理" image="order" selectedImage="order_selected" id="J49-2Q-5d5"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ked-WI-vgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Product" referencedIdentifier="ProductNavigationView" id="pFW-sn-QcM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="aSg-kW-EPi"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lS9-AN-M1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1327" y="851"/>
-        </scene>
-        <!--商品管理-->
-        <scene sceneID="lAe-lK-p4D">
-            <objects>
-                <viewController id="H6u-uE-yZx" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Su7-GN-zVg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="CQd-RP-Qm8"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="商品管理" image="product" selectedImage="product_selected" id="3SG-yU-eDL"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kxt-JH-CRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2010" y="466"/>
-        </scene>
-        <!--最新消息-->
-        <scene sceneID="f3e-iT-wRW">
-            <objects>
-                <viewController id="no7-KB-NGc" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XIW-DB-Qd1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Cd-PZ-332">
-                                <rect key="frame" x="84" y="264" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="oPN-3d-LR9" kind="show" id="tXl-KI-xg2"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="zdI-iJ-WBH"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="最新消息" image="news" selectedImage="news_selected" id="G2F-d1-C2l"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lkL-UD-zq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2010" y="-200"/>
+            <point key="canvasLocation" x="1798" y="198"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ALY-ut-fb7">
@@ -85,22 +48,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="no7-KB-NGc" kind="relationship" relationship="viewControllers" id="twZ-Y5-8RO"/>
-                        <segue destination="H6u-uE-yZx" kind="relationship" relationship="viewControllers" id="LXL-qA-Gh9"/>
-                        <segue destination="0ty-zq-Dr1" kind="relationship" relationship="viewControllers" id="gcw-c5-5Bw"/>
+                        <segue destination="oPN-3d-LR9" kind="relationship" relationship="viewControllers" id="9rS-y2-sX7"/>
+                        <segue destination="JB8-P1-8f6" kind="relationship" relationship="viewControllers" id="fMQ-6k-ige"/>
+                        <segue destination="pFW-sn-QcM" kind="relationship" relationship="viewControllers" id="Tsh-Ii-jaP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2M-m9-H2S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1170" y="123"/>
+            <point key="canvasLocation" x="1167" y="-36"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="news" width="37.5" height="37.5"/>
-        <image name="news_selected" width="37.5" height="37.5"/>
-        <image name="order" width="37.5" height="37.5"/>
-        <image name="order_selected" width="37.5" height="37.5"/>
-        <image name="product" width="37.5" height="37.5"/>
-        <image name="product_selected" width="37.5" height="37.5"/>
-    </resources>
 </document>

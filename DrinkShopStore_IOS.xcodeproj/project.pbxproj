@@ -12,7 +12,7 @@
 		2B310E352169401E00EBAEA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B310E332169401E00EBAEA2 /* Main.storyboard */; };
 		2B310E372169401F00EBAEA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B310E362169401F00EBAEA2 /* Assets.xcassets */; };
 		2B310E3A2169401F00EBAEA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B310E382169401F00EBAEA2 /* LaunchScreen.storyboard */; };
-		7B2B0179218D5FDA00FE1469 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2B0178218D5FDA00FE1469 /* Storyboard.storyboard */; };
+		7B2B0179218D5FDA00FE1469 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2B0178218D5FDA00FE1469 /* Activity.storyboard */; };
 		7B2B017B218D7E9E00FE1469 /* ActivitiesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2B017A218D7E9E00FE1469 /* ActivitiesListTableViewController.swift */; };
 		7BAD1B78218D8F1A00D66B0C /* ActivitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD1B77218D8F1A00D66B0C /* ActivitiesTableViewController.swift */; };
 		7BAD1B7A218D93D800D66B0C /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD1B79218D93D800D66B0C /* Activity.swift */; };
@@ -20,6 +20,8 @@
 		7BAD1BBE2191B65500D66B0C /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD1BBD2191B65500D66B0C /* ActivitiesTableViewCell.swift */; };
 		7BFE72AA219210A5006C700B /* Communicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE72A9219210A5006C700B /* Communicator.swift */; };
 		7BFE72B62192E30D006C700B /* photo-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFE72B52192E30C006C700B /* photo-camera.png */; };
+		7BFE72C421941E0D006C700B /* Order.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BFE72C321941E0D006C700B /* Order.storyboard */; };
+		7BFE72C621941E19006C700B /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BFE72C521941E19006C700B /* Product.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +32,7 @@
 		2B310E362169401F00EBAEA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B310E392169401F00EBAEA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B310E3B2169401F00EBAEA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B2B0178218D5FDA00FE1469 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		7B2B0178218D5FDA00FE1469 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
 		7B2B017A218D7E9E00FE1469 /* ActivitiesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListTableViewController.swift; sourceTree = "<group>"; };
 		7BAD1B77218D8F1A00D66B0C /* ActivitiesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewController.swift; sourceTree = "<group>"; };
 		7BAD1B79218D93D800D66B0C /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
@@ -38,6 +40,8 @@
 		7BAD1BBD2191B65500D66B0C /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
 		7BFE72A9219210A5006C700B /* Communicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communicator.swift; sourceTree = "<group>"; };
 		7BFE72B52192E30C006C700B /* photo-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-camera.png"; sourceTree = "<group>"; };
+		7BFE72C321941E0D006C700B /* Order.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Order.storyboard; sourceTree = "<group>"; };
+		7BFE72C521941E19006C700B /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 		7BFE72B92193F2C2006C700B /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				7BFE72C221941DF9006C700B /* View */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -102,7 +107,7 @@
 			children = (
 				7BFE72BE2193F3AC006C700B /* View */,
 				7BFE72B72193F265006C700B /* Controller */,
-				7B2B0178218D5FDA00FE1469 /* Storyboard.storyboard */,
+				7B2B0178218D5FDA00FE1469 /* Activity.storyboard */,
 				7BFE72B52192E30C006C700B /* photo-camera.png */,
 				7BFE72BD2193F390006C700B /* Model */,
 			);
@@ -112,6 +117,7 @@
 		7BFE72BB2193F32A006C700B /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				7BFE72C121941DF2006C700B /* View */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -140,6 +146,22 @@
 			isa = PBXGroup;
 			children = (
 				7BAD1BBD2191B65500D66B0C /* ActivitiesTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7BFE72C121941DF2006C700B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7BFE72C321941E0D006C700B /* Order.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7BFE72C221941DF9006C700B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7BFE72C521941E19006C700B /* Product.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,10 +225,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B310E3A2169401F00EBAEA2 /* LaunchScreen.storyboard in Resources */,
-				7B2B0179218D5FDA00FE1469 /* Storyboard.storyboard in Resources */,
+				7B2B0179218D5FDA00FE1469 /* Activity.storyboard in Resources */,
+				7BFE72C621941E19006C700B /* Product.storyboard in Resources */,
 				2B310E372169401F00EBAEA2 /* Assets.xcassets in Resources */,
 				2B310E352169401E00EBAEA2 /* Main.storyboard in Resources */,
 				7BFE72B62192E30D006C700B /* photo-camera.png in Resources */,
+				7BFE72C421941E0D006C700B /* Order.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

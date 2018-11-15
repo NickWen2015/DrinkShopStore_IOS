@@ -130,19 +130,43 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="95.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e7X-r2-DZF">
-                                                    <rect key="frame" x="16" y="5" width="85" height="85"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_product_drink_shop.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7X-r2-DZF">
+                                                    <rect key="frame" x="16" y="5" width="85.5" height="85.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="e7X-r2-DZF" secondAttribute="height" multiplier="1:1" id="CsQ-68-l7H"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8v-hV-rgL">
-                                                    <rect key="frame" x="109" y="65" width="26" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="camera icon" image="photo-camera.png"/>
-                                                    <connections>
-                                                        <action selector="pickPictureBtnPressed:" destination="G3V-aL-HBE" eventType="touchUpInside" id="bkw-lO-Njn"/>
-                                                    </connections>
-                                                </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXu-BU-sIF">
+                                                    <rect key="frame" x="16" y="5" width="85.5" height="85.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8v-hV-rgL">
+                                                            <rect key="frame" x="60.5" y="61.5" width="20" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="NCf-Xw-Tio"/>
+                                                                <constraint firstAttribute="height" constant="22" id="NRP-dF-lIk"/>
+                                                            </constraints>
+                                                            <state key="normal" title="camera icon" image="photo-camera.png"/>
+                                                            <connections>
+                                                                <action selector="pickPictureBtnPressed:" destination="G3V-aL-HBE" eventType="touchUpInside" id="bkw-lO-Njn"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="C8v-hV-rgL" secondAttribute="trailing" constant="5" id="CCe-hQ-0i4"/>
+                                                        <constraint firstAttribute="bottom" secondItem="C8v-hV-rgL" secondAttribute="bottom" constant="2" id="mjH-0T-clV"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yXu-BU-sIF" firstAttribute="height" secondItem="e7X-r2-DZF" secondAttribute="height" id="4iP-Zg-pJa"/>
+                                                <constraint firstItem="e7X-r2-DZF" firstAttribute="leading" secondItem="cYC-mm-W1Z" secondAttribute="leading" constant="16" id="HEL-Ln-8Kf"/>
+                                                <constraint firstItem="yXu-BU-sIF" firstAttribute="leading" secondItem="e7X-r2-DZF" secondAttribute="leading" id="LWD-Ho-ANk"/>
+                                                <constraint firstAttribute="bottom" secondItem="e7X-r2-DZF" secondAttribute="bottom" constant="5" id="SHA-Iz-cKR"/>
+                                                <constraint firstItem="e7X-r2-DZF" firstAttribute="centerY" secondItem="cYC-mm-W1Z" secondAttribute="centerY" id="bEr-cI-HGP"/>
+                                                <constraint firstItem="yXu-BU-sIF" firstAttribute="bottom" secondItem="e7X-r2-DZF" secondAttribute="bottom" id="fxa-vH-BxR"/>
+                                                <constraint firstItem="yXu-BU-sIF" firstAttribute="width" secondItem="e7X-r2-DZF" secondAttribute="width" id="prg-Iz-WR7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -185,17 +209,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇開始日期" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jY9-WH-zFX">
-                                                    <rect key="frame" x="16" y="11" width="351" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textFieldBeginEditing:" destination="G3V-aL-HBE" eventType="editingDidEnd" id="oKd-YV-ty2"/>
-                                                    </connections>
-                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇開始日期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXC-Sl-bR3">
+                                                    <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EXC-Sl-bR3" firstAttribute="leading" secondItem="X7w-dm-RPN" secondAttribute="leadingMargin" id="Rot-LN-BY8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="EXC-Sl-bR3" secondAttribute="trailing" id="SGM-Y2-Uq4"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="EXC-Sl-bR3" secondAttribute="bottom" id="Tup-tk-a7E"/>
+                                                <constraint firstItem="EXC-Sl-bR3" firstAttribute="top" secondItem="X7w-dm-RPN" secondAttribute="topMargin" id="kxV-Ej-L6o"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VGx-QG-jWR" customClass="ActivitiesTableViewCell" customModule="DrinkShopStore_IOS" customModuleProvider="target">
@@ -231,17 +257,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請選擇結束日期" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oz8-gh-8KB">
-                                                    <rect key="frame" x="16" y="11" width="353" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textFieldBeginEditing:" destination="G3V-aL-HBE" eventType="editingDidEnd" id="j7f-pq-XJY"/>
-                                                    </connections>
-                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請選擇結束日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kk-g8-CzQ">
+                                                    <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4kk-g8-CzQ" firstAttribute="bottom" secondItem="NzF-e8-7n1" secondAttribute="bottomMargin" id="HIk-IF-vbr"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="4kk-g8-CzQ" secondAttribute="trailing" id="PVe-7u-zXV"/>
+                                                <constraint firstItem="4kk-g8-CzQ" firstAttribute="leading" secondItem="NzF-e8-7n1" secondAttribute="leadingMargin" id="fUE-vl-HWd"/>
+                                                <constraint firstItem="4kk-g8-CzQ" firstAttribute="top" secondItem="NzF-e8-7n1" secondAttribute="topMargin" id="vbl-ml-UYW"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="w50-UU-5gj" customClass="ActivitiesTableViewCell" customModule="DrinkShopStore_IOS" customModuleProvider="target">
@@ -282,18 +310,18 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Nlb-hv-Q2F">
                             <connections>
-                                <segue destination="9hk-BR-Jae" kind="unwind" unwindAction="unwindToList:" id="hTO-gs-UYn"/>
+                                <segue destination="9hk-BR-Jae" kind="unwind" identifier="save" unwindAction="unwindToList:" id="vgf-gG-1GD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="EndDatePicker" destination="WNv-xj-cKl" id="v6a-cg-oQZ"/>
-                        <outlet property="StartDatePicker" destination="j5f-s3-YT3" id="kX3-5y-ga3"/>
-                        <outlet property="activityEDateTextField" destination="Oz8-gh-8KB" id="TN9-QP-aOA"/>
+                        <outlet property="activityEDateLabel" destination="4kk-g8-CzQ" id="xGg-sq-NMe"/>
                         <outlet property="activityImage" destination="e7X-r2-DZF" id="Gea-sd-XAW"/>
                         <outlet property="activityNameTextfield" destination="ZFV-br-VqH" id="QqT-kU-mTo"/>
-                        <outlet property="activitySDateTextField" destination="jY9-WH-zFX" id="3BM-TJ-Gvs"/>
+                        <outlet property="activitySDateLabel" destination="EXC-Sl-bR3" id="o3p-1I-5us"/>
+                        <outlet property="endDatePicker" destination="WNv-xj-cKl" id="Zbt-cN-Nf5"/>
                         <outlet property="saveBarButtonItem" destination="Nlb-hv-Q2F" id="M6v-7b-OI7"/>
+                        <outlet property="startDatePicker" destination="j5f-s3-YT3" id="j37-c6-CSg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKh-c2-p33" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -337,11 +365,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="img_product_drink_shop.png" width="90" height="90"/>
         <image name="news" width="37.5" height="37.5"/>
-        <image name="news_selected" width="37.5" height="37.5"/>
+        <image name="news_selected" width="38" height="38"/>
         <image name="photo-camera.png" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xFn-HY-v9n"/>
+        <segue reference="AKu-Bg-niZ"/>
     </inferredMetricsTieBreakers>
 </document>

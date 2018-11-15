@@ -14,7 +14,7 @@ struct Activity: Codable {
     let activityName: String
     let activityStartDate: String
     let activityEndDate: String
-//    let activityImage: String
+//    let activityImage: Data
     
     private static var fileURL: URL{
         var documentDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

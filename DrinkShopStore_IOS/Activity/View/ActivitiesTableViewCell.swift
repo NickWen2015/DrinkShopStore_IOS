@@ -15,7 +15,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var activitySDateLabel: UILabel!
     var activity: Activity?{
         didSet{
-           
+//            activityImage.image = activity?.activityImage
             activityNameLabel.text = activity?.activityName
             activitySDateLabel.text = activity?.activityStartDate
             activityEDateLabel.text = activity?.activityEndDate

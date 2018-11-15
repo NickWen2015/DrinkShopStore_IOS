@@ -13,30 +13,22 @@ import MobileCoreServices
 class ActivitiesTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
-    
-    
-    
     @IBOutlet weak var activityNameTextfield: UITextField!
-    
-    
-    
     @IBOutlet weak var activityImage: UIImageView!
-    @IBOutlet weak var activitySDateTextField: UITextField!
-    
-    @IBOutlet weak var activityEDateTextField: UITextField!
+    @IBOutlet weak var activitySDateLabel: UILabel!
+    @IBOutlet weak var activityEDateLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
-    
-    
     @IBOutlet weak var endDatePicker: UIDatePicker!
     
     
     
     var activity: Activity?
     let communicator = Communicator.shared
-    //IndexPath
     
+    //IndexPath
     let startDateTitle = IndexPath(row: 0, section: 2)
     let endDateTitle = IndexPath(row: 0, section: 3)
+    
     
     //控制項
     var startDateShown = false {
@@ -54,22 +46,25 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         super.viewDidLoad()
         
         
-        
         if let  activity = activity {
             activityNameTextfield.text = activity.activityName
-            //            activitySDateTextField.text = activity.activityStartDate
-            //            activityEDateTextField.text = activity.activityEndDate
-            
-            
+//                        activitySDateTextField.text = activity.activityStartDate
+//                        activityEDateTextField.text = activity.activityEndDate
         }
+        
         updateSaveButtonState()
         
         
         startDatePicker?.datePickerMode = .date
         endDatePicker?.datePickerMode = .date
         
+        startDatePicker.minimumDate = Calendar.current.date(byAdding:. day, value: 0, to: Date())
+       
+        
         startDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         endDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        
+        
         //                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ActivitiesTableViewController.viewTapped(gestureRecognize:)))
         //
         //                view.addGestureRecognizer(tapGesture)
@@ -88,24 +83,32 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         
         let dateformatter = DateFormatter()
         
-        dateformatter.dateFormat = "MM/dd/yyyy"
+        //自定義日期格式
+        dateformatter.dateFormat = "yyyy-MM-dd"
         
         
         let startDateValue = dateformatter.string(from: startDatePicker.date)
         let endDateValue = dateformatter.string(from: endDatePicker.date)
         
-        activitySDateTextField.text = startDateValue
-        activityEDateTextField.text = endDateValue
-        view.endEditing(true)
+        endDatePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: startDatePicker.date)
+      
+        
+        if startDateShown == true {
+            activitySDateLabel.text = startDateValue
+            activitySDateLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            
+        } else {
+            activityEDateLabel.text = endDateValue
+            activityEDateLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            view.endEditing(true)
+        }
     }
-    
-    
     
     func updateSaveButtonState(){
         
         let activityName = activityNameTextfield.text ?? ""
-        let activitySDate = activitySDateTextField.text ?? ""
-        let activityEDate = activityEDateTextField.text ?? ""
+        let activitySDate = activitySDateLabel.text ?? ""
+        let activityEDate = activityEDateLabel.text ?? ""
         
         let isNameExist = !activityName.isEmpty
         let isSDateExist = !activitySDate.isEmpty
@@ -127,8 +130,8 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         {return}
         
         let activityName = activityNameTextfield.text ?? ""
-        let activitySDate = activitySDateTextField.text ?? ""
-        let activityEDate = activityEDateTextField.text ?? ""
+        let activitySDate = activitySDateLabel.text ?? ""
+        let activityEDate = activityEDateLabel.text ?? ""
         activity = Activity(activityName: activityName, activityStartDate: activitySDate, activityEndDate: activityEDate)
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -180,41 +183,41 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         return 44.0
     }
     
-    //
     
-    //        @IBAction func pickPictureBtnPressed(_ sender: Any) {
-    //
-    //            let alert = UIAlertController(title: "Please choose source:", message: nil, preferredStyle: .actionSheet)
-    //            let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
-    //                self.launchPicker(source: .camera)
-    //            }
-    //            let library = UIAlertAction(title: "Photo library", style: .default) { (action) in
-    //                self.launchPicker(source: .photoLibrary)
-    //            }
-    //            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-    //            alert.addAction(camera)
-    //            alert.addAction(library)
-    //            alert.addAction(cancel)
-    //            present(alert, animated: true)
-    //    }
-    //    func launchPicker(source: UIImagePickerController.SourceType) {
-    //
-    //        //Check if the source is valid or not?
-    //        guard UIImagePickerController.isSourceTypeAvailable(source)
-    //            else {
-    //                print("Invalid source type")
-    //                return
-    //        }
-    //
-    //        let picker = UIImagePickerController()
-    //        picker.delegate = self
-    //        //        picker.mediaTypes = ["public.image", "public.movie"]
-    //        picker.mediaTypes = [kUTTypeImage] as [String]
-    //        picker.sourceType = source
-    //
-    //
-    //        present(picker, animated: true)
-    //    }
+    
+            @IBAction func pickPictureBtnPressed(_ sender: Any) {
+    
+                let alert = UIAlertController(title: "Please choose source:", message: nil, preferredStyle: .actionSheet)
+                let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
+                    self.launchPicker(source: .camera)
+                }
+                let library = UIAlertAction(title: "Photo library", style: .default) { (action) in
+                    self.launchPicker(source: .photoLibrary)
+                }
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+                alert.addAction(camera)
+                alert.addAction(library)
+                alert.addAction(cancel)
+                present(alert, animated: true)
+        }
+        func launchPicker(source: UIImagePickerController.SourceType) {
+    
+            //Check if the source is valid or not?
+            guard UIImagePickerController.isSourceTypeAvailable(source)
+                else {
+                    print("Invalid source type")
+                    return
+            }
+    
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            //        picker.mediaTypes = ["public.image", "public.movie"]
+            picker.mediaTypes = [kUTTypeImage] as [String]
+            picker.sourceType = source
+    
+    
+            present(picker, animated: true)
+        }
     //UIImage最好不要存在手機記憶體,如果必要記得壓縮,png是無損,所以檔案會比jpg大。選jpg可以減輕server負擔。
     //MARK: - UIImagePickerControllerDelegate protocol Method.
     //    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

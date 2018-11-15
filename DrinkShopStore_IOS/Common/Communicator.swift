@@ -27,6 +27,7 @@ typealias DownloadDoneHandler = (_ result:Data?, _ error:Error?) -> Void
 class Communicator {  //Singleton instance 單一實例模式
     
     // SERVER_URL 常數
+    
     static let BASEURL = Common.SERVER_URL
     let MEMBERSERVLET_URL = BASEURL + "MemberServlet"
     let NEWSSERVLET_URL = BASEURL + "NewsServlet"

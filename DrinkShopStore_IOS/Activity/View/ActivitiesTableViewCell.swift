@@ -9,17 +9,18 @@
 import UIKit
 
 class ActivitiesTableViewCell: UITableViewCell {
-   @IBOutlet weak var activityNameLabel: UILabel!
+
+    @IBOutlet weak var activityNameLabel: UILabel!
     @IBOutlet weak var activityImage: UIImageView!
     @IBOutlet weak var activityEDateLabel: UILabel!
     @IBOutlet weak var activitySDateLabel: UILabel!
-    var activity: Activity?{
+    var activity: NewsItem?{
         didSet{
-//            activityImage.image = activity?.activityImage
-            activityNameLabel.text = activity?.activityName
-            activitySDateLabel.text = activity?.activityStartDate
-            activityEDateLabel.text = activity?.activityEndDate
-          
+//            activityImage.image = 
+            activityNameLabel.text = activity?.name
+            activitySDateLabel.text = activity?.sDate
+            activityEDateLabel.text = activity?.eDate
+
         }
     }
     

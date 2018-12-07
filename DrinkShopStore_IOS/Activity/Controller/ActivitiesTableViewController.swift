@@ -20,10 +20,16 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     
+    var newsItem: NewsItem?
+    var id_value = 0
+    var name_value = ""
+    var sDate_value = ""
+    var eDate_value = ""
+    var newsId:Int = 0
+    var status: Int = 1
     
-    
-    var activity: Activity?
     let communicator = Communicator.shared
+    let PHOTO_URL = Common.SERVER_URL + "NewsServlet"
     
     //IndexPath
     let startDateTitle = IndexPath(row: 0, section: 2)
@@ -45,11 +51,12 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        if let  activity = activity {
-            activityNameTextfield.text = activity.activityName
-//                        activitySDateTextField.text = activity.activityStartDate
-//                        activityEDateTextField.text = activity.activityEndDate
+        if let updateNewsItem = newsItem {
+            newsId = updateNewsItem.id
+            activityNameTextfield.text = updateNewsItem.name
+            activitySDateLabel.text = updateNewsItem.sDate
+            activityEDateLabel.text = updateNewsItem.eDate
+            
         }
         
         updateSaveButtonState()
@@ -59,7 +66,7 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         endDatePicker?.datePickerMode = .date
         
         startDatePicker.minimumDate = Calendar.current.date(byAdding:. day, value: 0, to: Date())
-       
+        
         
         startDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         endDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
@@ -68,17 +75,16 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         //                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ActivitiesTableViewController.viewTapped(gestureRecognize:)))
         //
         //                view.addGestureRecognizer(tapGesture)
+        
     }
-    
-    
     
     @IBAction func textFieldBeginEditing(_ sender: Any) {
         updateSaveButtonState()
     }
     
-    //        @objc func viewTapped(gestureRecognize: UITapGestureRecognizer){
-    //            view.endEditing(true)
-    //        }
+    @objc func viewTapped(gestureRecognize: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
     @objc func datePickerValueChanged (datePicker: UIDatePicker) {
         
         let dateformatter = DateFormatter()
@@ -91,7 +97,7 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         let endDateValue = dateformatter.string(from: endDatePicker.date)
         
         endDatePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: startDatePicker.date)
-      
+        
         
         if startDateShown == true {
             activitySDateLabel.text = startDateValue
@@ -104,36 +110,9 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         }
     }
     
-    func updateSaveButtonState(){
-        
-        let activityName = activityNameTextfield.text ?? ""
-        let activitySDate = activitySDateLabel.text ?? ""
-        let activityEDate = activityEDateLabel.text ?? ""
-        
-        let isNameExist = !activityName.isEmpty
-        let isSDateExist = !activitySDate.isEmpty
-        let isEDateExist = !activityEDate.isEmpty
-        let shouldEnable = isNameExist && isSDateExist && isEDateExist
-        saveBarButtonItem.isEnabled = shouldEnable
-        
-    }
-    
-    
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard segue.identifier == "save" else
-        { return }
-        
-        guard  activityNameTextfield.text!.count > 0 else
-        {return}
-        
-        let activityName = activityNameTextfield.text ?? ""
-        let activitySDate = activitySDateLabel.text ?? ""
-        let activityEDate = activityEDateLabel.text ?? ""
-        activity = Activity(activityName: activityName, activityStartDate: activitySDate, activityEndDate: activityEDate)
-    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath{
         case startDateTitle:
@@ -158,11 +137,14 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // 針對開始日期的調整
+        let activityImageIndexPath = IndexPath(row: 0, section: 0)
         let startDatePickerIndexPath = IndexPath(row: 1, section: 2)
         let endDatePickerIndexPath = IndexPath(row: 1, section: 3)
         
-        
-        if indexPath == startDatePickerIndexPath{
+        if indexPath == activityImageIndexPath{
+            return 90.0
+        }
+        else if indexPath == startDatePickerIndexPath{
             
             if startDateShown{
                 
@@ -180,75 +162,225 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
                 return 0.0
             }
         }
-        return 44.0
+        return  44.0
     }
     
     
-    
-            @IBAction func pickPictureBtnPressed(_ sender: Any) {
-    
-                let alert = UIAlertController(title: "Please choose source:", message: nil, preferredStyle: .actionSheet)
-                let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
-                    self.launchPicker(source: .camera)
-                }
-                let library = UIAlertAction(title: "Photo library", style: .default) { (action) in
-                    self.launchPicker(source: .photoLibrary)
-                }
-                let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-                alert.addAction(camera)
-                alert.addAction(library)
-                alert.addAction(cancel)
-                present(alert, animated: true)
+    @IBAction func pickPictureBtnPressed(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Please choose source:", message: nil, preferredStyle: .actionSheet)
+        let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
+            self.launchPicker(source: .camera)
         }
-        func launchPicker(source: UIImagePickerController.SourceType) {
-    
-            //Check if the source is valid or not?
-            guard UIImagePickerController.isSourceTypeAvailable(source)
-                else {
-                    print("Invalid source type")
-                    return
-            }
-    
-            let picker = UIImagePickerController()
-            picker.delegate = self
-            //        picker.mediaTypes = ["public.image", "public.movie"]
-            picker.mediaTypes = [kUTTypeImage] as [String]
-            picker.sourceType = source
-    
-    
-            present(picker, animated: true)
+        let library = UIAlertAction(title: "Photo library", style: .default) { (action) in
+            self.launchPicker(source: .photoLibrary)
         }
-    //UIImage最好不要存在手機記憶體,如果必要記得壓縮,png是無損,所以檔案會比jpg大。選jpg可以減輕server負擔。
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(camera)
+        alert.addAction(library)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    func launchPicker(source: UIImagePickerController.SourceType) {
+        
+        //Check if the source is valid or not?
+        guard UIImagePickerController.isSourceTypeAvailable(source)
+            else {
+                print("Invalid source type")
+                return
+        }
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.mediaTypes = [kUTTypeImage] as [String]
+        picker.sourceType = source
+        
+        
+        present(picker, animated: true)
+    }
+    
+    
     //MARK: - UIImagePickerControllerDelegate protocol Method.
-    //    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    //        print("info: \(info)")
-    //        guard let type = info[.mediaType] as? String  else {
-    //            assertionFailure("Invalid type")
-    //            return
-    //        }
-    //        if type == kUTTypeImage as String {
-    //            guard let originalImage = info[.originalImage] as? UIImage else {
-    //                assertionFailure("originalImage is nil.")
-    //                return
-    //            }
-    //            let resizedImage = originalImage.resize(maxEdge: 1024)!
-    //            let jpgData = resizedImage.jpegData(compressionQuality: 0.8)//壓縮率:0.0~1之間,為了品質一般都控制在0.7~0.8
-    //            //            let pngData = resizedImage.pngData()
-    //            print("jpgData: \(jpgData!.count)")
-    //            print("pngData: \(pngData!.count)")
-    //            communicator.send(photo: jpgData!) { (result, error)
-    //                in
-    //                if let error = error {
-    //                    print("Upload photo fail: \(error)")
-    //                    return
-    //                }
-    //                self.doRefreshJob()
-    //            }
-    //        } else if type == kUTTypeMovie as String {
-    //            //...
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("info: \(info)")
+        guard let type = info[.mediaType] as? String  else {
+            assertionFailure("Invalid type")
+            return
+        }
+        if type == kUTTypeImage as String {
+            guard let originalImage = info[.originalImage] as? UIImage else {
+                assertionFailure("originalImage is nil.")
+                return
+            }
+            let resizedImage = originalImage.resize(maxEdge: 1024)!
+            let jpgData = resizedImage.jpegData(compressionQuality: 0.8)//壓縮率:0.0~1之間,為了品質一般都控制在0.7~0.8
+            
+            let pngData = resizedImage.pngData()
+            print("jpgData: \(jpgData!.count)")
+            print("pngData: \(pngData!.count)")
+            
+            
+            activityImage.image = resizedImage
+            
+            picker.dismiss(animated: true) //Important! 加這行picker才會把自己收起來
+        }
+    }
+    
+    func updateSaveButtonState(){
+        
+        let activityName = activityNameTextfield.text ?? ""
+        let activitySDate = activitySDateLabel.text ?? ""
+        let activityEDate = activityEDateLabel.text ?? ""
+        let activityImage = self.activityImage.image
+        
+        let isNameExist = !activityName.isEmpty
+        let isSDateExist = !activitySDate.isEmpty
+        let isEDateExist = !activityEDate.isEmpty
+        let isImageExist = !(activityImage?.isEqual(nil))!
+        let shouldEnable = isNameExist && isSDateExist && isEDateExist && isImageExist
+        saveBarButtonItem.isEnabled = shouldEnable
+    }
+    
+    func convertImageToBase64(image: UIImage) -> String {
+        let imageData = image.pngData()!
+        return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+    }
+    @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
+   
+        guard let selectedImage = activityImage.image else {
+            print("Image not found!")
+            return
+        }
+        
+        let imageBase64 =  convertImageToBase64(image: selectedImage)
+        let activityName = activityNameTextfield.text!
+        let activitySDate = activitySDateLabel.text!
+        let activityEDate = activityEDateLabel.text!
+        
+        
+        let newsItem = NewsItem(id: id_value, name: activityName, sDate: activitySDate, eDate: activityEDate)
+
+        
+        if self.newsItem != nil {
+            let id = self.newsItem?.id
+            
+            let updateNewsItem = NewsItem(id: id!, name: activityName, sDate: activitySDate, eDate: activityEDate)
+            
+            
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            
+            guard let newsData = try? encoder.encode(updateNewsItem) else {
+                assertionFailure("Cast news to json is Fail.")
+                return
+            }
+            
+            print(String(data: newsData, encoding: .utf8)!)
+            
+            guard let newsString = String(data: newsData, encoding: .utf8) else {
+                assertionFailure("Cast newsData to String is Fail.")
+                return
+            }
+            //寫入資料庫
+            communicator.newsUpdate(news: newsString, photo: imageBase64) { (result, error) in
+                if let error = error {
+                    print("Update news fail: \(error)")
+                    return
+                }
+                
+                guard let updateStatus = result as? Int else {
+                    assertionFailure("modify fail.")
+                    return
+                }
+                
+                if updateStatus == 1 {
+                    //跳出成功視窗
+                    let alertController = UIAlertController(title: "完成", message:
+                        "儲存成功", preferredStyle: .alert)
+                    let okBtn = UIAlertAction(title: "確認", style: .default,handler: { _ in
+                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "newsList") as! ActivitiesListTableViewController
+                        self.present(VC, animated: true, completion: nil)
+                    })
+                    alertController.addAction(okBtn)
+                    self.present(alertController, animated: true)
+                    //儲存按鈕消失
+                    self.saveBarButtonItem.isEnabled = false
+                    
+                } else {
+                    let alertController = UIAlertController(title: "失敗", message:
+                        "儲存失敗", preferredStyle: .alert)
+                    let okBtn = UIAlertAction(title: "確認", style: .default)
+                    alertController.addAction(okBtn)
+                    self.present(alertController, animated: true)
+                }
+            }
+            
+        } else {
+            
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            
+            guard let newsData = try? encoder.encode(newsItem) else {
+                assertionFailure("Cast news to json is Fail.")
+                return
+            }
+            
+            print(String(data: newsData, encoding: .utf8)!)
+            
+            guard let newsString = String(data: newsData, encoding: .utf8) else {
+                assertionFailure("Cast newsData to String is Fail.")
+                return
+            }
+            //寫入資料庫
+            communicator.newsInsert(news: newsString, photo: imageBase64) { (result, error) in
+                if let error = error {
+                    print("Insert news fail: \(error)")
+                    return
+                }
+                
+                guard let InsertStatus = result as? Int else {
+                    assertionFailure("modify fail.")
+                    return
+                }
+                
+                if InsertStatus == 1 {
+                    //跳出成功視窗
+                    let alertController = UIAlertController(title: "完成", message:
+                        "儲存成功", preferredStyle: .alert)
+                    let okBtn = UIAlertAction(title: "確認", style: .default,handler: { _ in
+                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "newsList") as! ActivitiesListTableViewController
+                        self.present(VC, animated: true, completion: nil)
+                    })
+                    alertController.addAction(okBtn)
+                    self.present(alertController, animated: true)
+                    //儲存按鈕消失
+                    self.saveBarButtonItem.isEnabled = false
+                    
+                } else {
+                    let alertController = UIAlertController(title: "失敗", message:
+                        "儲存失敗", preferredStyle: .alert)
+                    let okBtn = UIAlertAction(title: "確認", style: .default)
+                    alertController.addAction(okBtn)
+                    self.present(alertController, animated: true)
+                }
+            }
+        }
+    }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard segue.identifier == "save" else
+        { return }
+        
+        guard  activityNameTextfield.text!.count > 0 else
+        {return}
+        
+        let newsName = activityNameTextfield.text ?? ""
+        let sDate = activitySDateLabel.text ?? ""
+        let eDate = activityEDateLabel.text ?? ""
+        newsItem = NewsItem(id: id_value, name: newsName, sDate: sDate, eDate: eDate)
+    }
+    
+    
 }
-//        picker.dismiss(animated: true) //Important! 加這行picker才會把自己收起來
-
-
-
-

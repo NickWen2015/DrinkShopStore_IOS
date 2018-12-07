@@ -16,8 +16,10 @@ let PASSWORD_KEY = "password"
 let ACTION_KEY = "action"
 let ID_KEY = "id"
 let IMAGESIZE_KEY = "imageSize"
-
-
+let NEWS_KEY = "news"
+let IMAGEBASE64 = "imageBase64"
+let SDATE_KEY = "sDate"
+let EDATE_KEY = "eDate"
 
 //result:[String:Any] is dictionary declaration.
 typealias DoneHandler = (_ result: Any?, _ error:Error?) -> Void
@@ -35,11 +37,6 @@ class Communicator {  //Singleton instance 單一實例模式
     let PRODUCTSERVLET_URL = BASEURL + "ProductServlet"
     
     static let shared = Communicator()
-    private init() {
-        
-    }
-    
-    
     
     //MARK: - Common methods.
     func getPhotoById(photoURL: String, id: Int, imageSize: Int = 1080, completion: @escaping DownloadDoneHandler) {
@@ -53,7 +50,6 @@ class Communicator {  //Singleton instance 單一實例模式
         Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseData { response in
             
             self.handlePhoto(response: response, completion: completion)
-            
         }
     }
     
@@ -69,7 +65,6 @@ class Communicator {  //Singleton instance 單一實例模式
     }
     
     
-    
     // 發Request到Server(文字)
     func doPost(urlString:String, parameters:[String: Any], completion: @escaping DoneHandler) {
         
@@ -78,7 +73,6 @@ class Communicator {  //Singleton instance 單一實例模式
             self.handleJSON(response: response, completion: completion)
         }
     }
-    
     
     // 處理Server回傳的JSON
     private func handleJSON(response: DataResponse<Any>, completion: DoneHandler) {
@@ -89,12 +83,12 @@ class Communicator {  //Singleton instance 單一實例模式
         case .failure(let error):
             print("Server respond error: \(error)")
             completion(nil, error)
-            
         }
-        
     }
-    
 }
+
+
+
 
 
 

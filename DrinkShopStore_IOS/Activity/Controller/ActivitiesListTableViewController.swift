@@ -9,150 +9,241 @@
 import UIKit
 
 class ActivitiesListTableViewController: UITableViewController {
-
     
-    //繼承UITableViewController 已包含protocol & 下列兩行任務
-    //tableView.delegate = self
-    //tableView.datasource = self
     
-    var activities = [Activity]()
+    var newsArray = [NewsItem]()
+    var newsNameArray = [String]()
+    var newsSDateArray = [String]()
+    var newsEDateArray = [String]()
+    var newsIdArray = [Int]()
+    var imageArray = [Data]()
+  
+    
+    var newsItem: NewsItem?
+    var id_value = 0
+    var name_value = ""
+    var sDate_value = ""
+    var eDate_value = ""
+  
+    
+    
+    let communicator = Communicator.shared
+    let PHOTO_URL = Common.SERVER_URL + "NewsServlet"
+    
+    
+    
+    
+    
+    @IBOutlet var newsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         
         //啟用 navigation 導覽列上的編輯 tableView 鈕
         navigationItem.leftBarButtonItem = editButtonItem
         
-
-        
+        //取得最新消息資訊（文字部分）
+        Communicator.shared.retriveNewsInfo{ (result, error) in
+            if let error = error {
+                print(" Load Data Error: \(error)")
+                return
+            }
+            guard let result = result else {
+                print (" result is nil")
+                return
+            }
+            print("Load Data OK.")
+            
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
+                print(" Fail to generate jsonData.")
+                
+                return
+            }
+            //解碼
+            let decoder = JSONDecoder()
+            guard let resultObject = try? decoder.decode([NewsItem].self, from: jsonData) else {
+                print(" Fail to decode jsonData.")
+                return
+            }
+            for newsItem in resultObject {
+                self.newsArray.append(newsItem)
+                
+                let newsName = newsItem.name
+                self.newsNameArray.append(newsName)
+            }
+            for newsItem in resultObject {
+                let newsSDate = newsItem.sDate
+                
+                self.newsSDateArray.append(newsSDate)
+                
+            }
+            
+            for newsItem in resultObject {
+                let newsEDate = newsItem.eDate
+                
+                self.newsEDateArray.append(newsEDate)
+              
+            }
+            
+            
+            
+            for newsItem in resultObject {
+                let newsId = newsItem.id
+                
+                self.newsIdArray.append(newsId)
+            }
+            DispatchQueue.main.async {
+                self.newsTableView.reloadData()
+            }
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //註冊通知
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(save), name: UIApplication.willResignActiveNotification, object: nil)
-    }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    
-    @objc func save(){
-        Activity.save(activities)
-    }
     
     // MARK: - Table view data source
     
-    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
     //取得總共幾列
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return  activities.count
-        
-        
+        return  newsIdArray.count
     }
     
     //dataSource
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ActivitiesTableViewCell
-  
-    // 取得 activity
-     
-
-
-
-//        let activity = activities[indexPath.row] //第幾列
-//        cell.activity = activity
+    
+        let id = newsIdArray[indexPath.row]
         
+        Communicator.shared.getPhotoById(photoURL: self.PHOTO_URL, id: id) { (result, error) in
+            
+            guard let data = result else {
+                return
+            }
+            
+            if let currentIndexPath = tableView.indexPath(for: cell), currentIndexPath == indexPath {
+                DispatchQueue.main.async {
+                    
+                    cell.activityImage.image = UIImage(data: data)
+                    
+                }
+                
+                cell.activityNameLabel.text = self.newsNameArray[indexPath.row]
+                cell.activitySDateLabel.text = self.newsSDateArray[indexPath.row]
+                cell.activityEDateLabel.text = self.newsEDateArray[indexPath.row]
+                
+            }
+        }
         return cell
-  
-        
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
-      
+        
     }
-    
     
     
     @IBAction func unwindToList(_ segue: UIStoryboardSegue) {
-        
-        guard segue.identifier == "save" else
-        {return}
-        
-        // 新增
-    
-        let source = segue.source as!
-        ActivitiesTableViewController
-        if let activity = source.activity {
-            //判斷使用者有沒有點選其中某列
-            if let selectedIndexPath =
-                tableView.indexPathForSelectedRow{
-                //修改
-                activities[selectedIndexPath.row] = activity
-                //重新整理該 indexpath畫面
-                tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-                //tableView.reloadData 可以全部重新載入,但是效能沒那麼好,但是資料如果是從網路下取下來的話,會造成資料全部重新從網路重載,效能會不好
-            }else{
-                
-             
-                //準備一個新的 indexPath
-                let indexPath = IndexPath(row: activities.count, section: 0)
-             
-               activities.append(activity)
-                tableView.insertRows(at: [indexPath], with: .automatic)
-            }
-        }
-    
-   
-        
     }
+  
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //             Delete the row from the data source
-            activities.remove(at: indexPath.row) //先砍資料再砍畫面
+            //Delete the row from the data source
+            let id = newsIdArray[indexPath.row]
+            newsIdArray.remove(at: indexPath.row) //先砍資料再砍畫面
+            
+            let activityName = newsNameArray[indexPath.row]
+            let activitySDate = newsSDateArray[indexPath.row]
+            let activityEDate = newsEDateArray[indexPath.row]
+            let newsItem = NewsItem(id: id, name: activityName, sDate: activitySDate, eDate: activityEDate)
+            
+            
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            
+            guard let newsData = try? encoder.encode(newsItem) else {
+                assertionFailure("Cast news to json is Fail.")
+                return
+            }
+            
+            print(String(data: newsData, encoding: .utf8)!)
+            
+            guard let newsString = String(data: newsData, encoding: .utf8) else {
+                assertionFailure("Cast newsData to String is Fail.")
+                return
+            }
+            
+            //寫入資料庫
+            communicator.newsDelete(news:newsString, id: id) { (result, error) in
+                if let error = error {
+                    print("Delete news fail: \(error)")
+                    return
+                }
+                
+                guard let updateStatus = result as? Int else {
+                    assertionFailure("modify fail.")
+                    return
+                }
+                
+                if updateStatus == 1 {
+                    //跳出成功視窗
+                    let alertController = UIAlertController(title: "完成", message:
+                        "刪除成功", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "確定", style: .default,handler: nil))
+                    self.present(alertController, animated: false, completion: nil)
+                    
+                } else {
+                    let alertController = UIAlertController(title: "失敗", message:
+                        "刪除失敗", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "確定", style: .default,handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }else if editingStyle == .insert {
             //             Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
-    
-    
-    
-    
-    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // 看看使用者選到了哪一個 indexPath
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
-      
-            let activity = activities[selectedIndexPath.row]
-            //取得下一頁
-            let destination = segue.destination as!
-            UINavigationController
-            let activityTableVC = destination.topViewController as! ActivitiesTableViewController
+        if segue.identifier == "update" {
+            // 看看使用者選到了哪一個 indexPath
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                
+                let newsItem = newsArray[selectedIndexPath.row]
+                
+                
+                // 取得下一頁
+                let  destination = segue.destination as! UINavigationController
+                
+                let activityTableVC = destination.topViewController as! ActivitiesTableViewController
+                
+                activityTableVC.newsItem = newsItem
+               
          
-          activityTableVC.activity = activity
-          
-            
-            
+               let id = newsItem.id
+                Communicator.shared.getPhotoById(photoURL: self.PHOTO_URL, id: id) { (result, error) in
+                    
+                    guard let data = result else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        activityTableVC.activityImage.image = UIImage(data: data)
+                    }
+                }
+            }
         }
         
     }
-    
-    
 }

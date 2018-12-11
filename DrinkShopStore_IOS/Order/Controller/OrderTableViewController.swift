@@ -11,53 +11,45 @@ import Photos
 
 class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputObjectsDelegate, AVCapturePhotoCaptureDelegate {
     
-    @IBOutlet weak var previewImageView: UIImageView!
     var orders: [Order] = []
     
     static let TAG = "OrderTableViewController"
     let communicator = Communicator.shared
     
-    // qr code
-    let supportedTypes: [AVMetadataObject.ObjectType] = [.qr, .code128, .code39, .code93, .upce, .pdf417, .ean13, .aztec]
-    // qr code
-    var session: AVCaptureSession?
-    var previewLayer: AVCaptureVideoPreviewLayer?
-    var cameraOutput: AVCapturePhotoOutput?
-    
     // Unwind Segue
-//    @IBAction func unwindToOrderListByChangeOrderStatus(segue: UIStoryboardSegue) {
-//        communicator.getAllOrder { (result, error) in
-//            if let error = error {
-//                PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "Error: \(error)")
-//                return
-//            }
-//
-//            guard let result = result else {
-//                PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "result is nil")
-//                return
-//            }
-//
-//            PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "result OK.")
-//
-//            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
-//                print("\(#line) Fail to generate jsonData.")
-//                return
-//            }
-//
-//            let decoder = JSONDecoder()
-//            guard let orderObject = try? decoder.decode([Order].self, from: jsonData) else {
-//                print("\(#line) Fail to decode [Order] jsonData.")
-//                return
-//            }
-//
-//            self.orders = orderObject
-//            PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "SET orders OK.")
-//
-//            self.tableView.reloadData()
-//
-//        }
-//
-//    }
+    @IBAction func unwindToOrderListByChangeOrderStatus(segue: UIStoryboardSegue) {
+        communicator.getAllOrder { (result, error) in
+            if let error = error {
+                PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "Error: \(error)")
+                return
+            }
+
+            guard let result = result else {
+                PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "result is nil")
+                return
+            }
+
+            PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "result OK.")
+
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
+                print("\(#line) Fail to generate jsonData.")
+                return
+            }
+
+            let decoder = JSONDecoder()
+            guard let orderObject = try? decoder.decode([Order].self, from: jsonData) else {
+                print("\(#line) Fail to decode [Order] jsonData.")
+                return
+            }
+
+            self.orders = orderObject
+            PrintHelper.println(tag: OrderTableViewController.TAG, line: #line, "SET orders OK.")
+
+            self.tableView.reloadData()
+
+        }
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,15 +146,6 @@ class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputOb
             let orderDetailVC = segue.destination as!
             OrderDetailViewController
             
-            
-            
-//            // 取得下一頁
-//            let destination = segue.destination as!
-//            UINavigationController
-//            let orderDetailVC = destination.topViewController as!
-//            OrderDetailViewController
-            
-            
             guard let orderId = orderDetailDisplay.orderId else {
                 print("ERROR: orderId is nil")
                 return
@@ -172,111 +155,7 @@ class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputOb
             
         }
     }
-    
-    
-    
-    @IBAction func scanBtnPressed(_ sender: Any) {
-        
-        // Prepare Input.
-        guard let captureDevice = AVCaptureDevice.default(for: .video) else {
-            print("Fail to create captureDevice.")
-            return
-        }
-        guard let inputDevice = try? AVCaptureDeviceInput(device: captureDevice) else {
-            print("Fail to create inputDevice")
-            return
-        }
-        
-        // Prepare Session.
-        session = AVCaptureSession()
-        session?.addInput(inputDevice)
-        
-        // Prepare output.
-        let metadataOutput = AVCaptureMetadataOutput()
-        session?.addOutput(metadataOutput)
-        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        metadataOutput.metadataObjectTypes = supportedTypes
-        
-        cameraOutput = AVCapturePhotoOutput()
-        session?.addOutput(cameraOutput!)
-        
-        // Prepare preview.
-        previewLayer = AVCaptureVideoPreviewLayer(session: session!)
-        previewLayer?.videoGravity = .resizeAspectFill
-        previewLayer?.frame = CGRect(origin: .zero, size: previewImageView.frame.size)
-        previewImageView.layer.addSublayer(previewLayer!)
-        
-        // Start Capture.
-        session?.startRunning()
-        previewImageView.image = nil
-        
-    }
-    
-    // MARK: - AVCaptureMetadataOutputObjectsDelegate Protocol Methods.
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        guard let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject else {
-            //      assertionFailure("Invalid metadataObjects")
-            return
-        }
-        
-        guard let content = metadataObject.stringValue else {
-            print("metadataObject.stringValue is nil.")
-            return
-        }
-        
-        // Stop output's report to delegate.
-        output.setMetadataObjectsDelegate(nil, queue: nil)
-        
-        // Output image.
-        let settings = AVCapturePhotoSettings()
-        settings.isAutoStillImageStabilizationEnabled = true
-        cameraOutput?.capturePhoto(with: settings, delegate: self)
-        
-        
-        communicator.changeOrderStatusByOrderId(orderId: Int(content)!, orderStatus:  String(1)) { (result, error) in
-            if let error = error {
-                print("Change orderStatus fail: \(error)")
-                return
-            }
-            
-        }
-        
-        // Show Alert with content.
-        let alert = UIAlertController(title: metadataObject.type.rawValue, message: "訂單： \(content) ,結單完成", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default)
-        alert.addAction(ok)
-        present(alert, animated: true)
-        viewDidLoad()
-        
-    }
-    
-    
-    // MARK: - AVCapturePhotoCaptureDelegate Methods.
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        
-        defer {
-            // Clean up!
-            session?.stopRunning()
-            session = nil
-            
-            previewLayer?.removeFromSuperlayer()
-            previewLayer = nil
-            
-            cameraOutput = nil
-        }
-        
-        if let error = error {
-            print("didFinishProcessingPhoto error: \(error)")
-            return
-        }
-        guard let data = photo.fileDataRepresentation() else {
-            assertionFailure("Fail to get photo data.")
-            return
-        }
-        //previewImageView.image = UIImage(data: data)
-        
-    }
-    
+
 }
 
 extension Communicator {
@@ -287,13 +166,6 @@ extension Communicator {
         let parameters: [String: Any] = [ACTION_KEY: "getAllOrder"]
         doPost(urlString: urlString, parameters: parameters, completion: completion)
     }
-    
-    // 修改OrderStatus
-    func changeOrderStatusByOrderId(orderId: Int, orderStatus: String, completion: @escaping DoneHandler) {
-        let urlString = Communicator.shared.ORDERSSERVLET_URL
-        let parameters: [String: Any] = [ACTION_KEY: "changeOrderStatusByOrderId", ORDERID_KEY: orderId, ORDERSTATUS_KEY: orderStatus]
-        doPost(urlString: urlString, parameters: parameters, completion: completion)
-    }
-    
+   
 }
 

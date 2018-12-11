@@ -16,9 +16,7 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     static let TAG = "QRCodeViewController"
     let communicator = Communicator.shared
     
-    // qr code
     let supportedTypes: [AVMetadataObject.ObjectType] = [.qr, .code128, .code39, .code93, .upce, .pdf417, .ean13, .aztec]
-    // qr code
     var session: AVCaptureSession?
     var previewLayer: AVCaptureVideoPreviewLayer?
     var cameraOutput: AVCapturePhotoOutput?
@@ -64,8 +62,6 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     }
     
     
-    
-    
     // MARK: - AVCaptureMetadataOutputObjectsDelegate Protocol Methods.
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject else {
@@ -96,12 +92,11 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
         
         // Show Alert with content.
-        let alert = UIAlertController(title: metadataObject.type.rawValue, message: "訂單： \(content) ,結單完成", preferredStyle: .alert)
+        let alert = UIAlertController(title: "結單完成", message: "訂單： \(content) ，結單完成", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default)
         alert.addAction(ok)
         present(alert, animated: true)
-        //viewDidLoad()
-        //self.performSegue(withIdentifier: "unwindToOrderListByChangeOrderStatus", sender: nil)
+       
     }
     
     
@@ -131,20 +126,21 @@ class QRCodeViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
     }
     
-   
-    @IBAction func saveBtnPressed(_ sender: UIButton) {
+    
+    @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "unwindToOrderListByChangeOrderStatus", sender: nil)
     }
+    
 }
 
 extension Communicator {
     
     // 修改OrderStatus
-//    func changeOrderStatusByOrderId(orderId: Int, orderStatus: String, completion: @escaping DoneHandler) {
-//        let urlString = Communicator.shared.ORDERSSERVLET_URL
-//        let parameters: [String: Any] = [ACTION_KEY: "changeOrderStatusByOrderId", ORDERID_KEY: orderId, ORDERSTATUS_KEY: orderStatus]
-//        doPost(urlString: urlString, parameters: parameters, completion: completion)
-//    }
+    func changeOrderStatusByOrderId(orderId: Int, orderStatus: String, completion: @escaping DoneHandler) {
+        let urlString = Communicator.shared.ORDERSSERVLET_URL
+        let parameters: [String: Any] = [ACTION_KEY: "changeOrderStatusByOrderId", ORDERID_KEY: orderId, ORDERSTATUS_KEY: orderStatus]
+        doPost(urlString: urlString, parameters: parameters, completion: completion)
+    }
     
 }
 

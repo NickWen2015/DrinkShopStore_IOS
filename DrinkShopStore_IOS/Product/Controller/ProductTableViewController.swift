@@ -20,45 +20,79 @@ class ProductTableViewController: UITableViewController {
     
     @IBAction func goBackFromAddDrink(segue: UIStoryboardSegue) {
         
-        communicator.getAllProduct { (result, error) in
-            if let error = error {
-                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: \(error)")
-                return
-            }
-            
-            guard let result = result else {
-                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: result is nil")
-                return
-            }
-            
-            PrintHelper.println(tag: "ProductTableViewController", line: #line, "result OK.")
-            
-            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
-                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to generate jsonData.")
-                return
-            }
-            
-            let decoder = JSONDecoder()
-            guard let productObject = try? decoder.decode([Product].self, from: jsonData) else {
-                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to decode jsonData.")
-                return
-            }
-            
-            self.products = productObject
-            
-            // CLAER TABLE DrinkShopStoreLogAllProduct
-            self.logSQLite.delete(table: self.logSQLite.logTable_allProduct)
-            
-            for product in self.products {
-                self.logSQLite.append(product)
-            }
-            
-            
-            PrintHelper.println(tag: "ProductTableViewController", line: #line, "PASSED: \(#function) OK")
-            
-            self.tableView.reloadData()
-            
-        }
+        viewDidLoad()
+        
+        //        communicator.getAllCategory { (result, error) in
+        //            if let error = error {
+        //                PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "Error: \(error)")
+        //                return
+        //            }
+        //
+        //            guard let result = result else {
+        //                PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "result is nil")
+        //                return
+        //            }
+        //
+        //            PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "result OK.")
+        //
+        //            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
+        //                print("\(#line) Fail to generate jsonData.")
+        //                return
+        //            }
+        //
+        //            let decoder = JSONDecoder()
+        //            guard let categoryObject = try? decoder.decode([Category].self, from: jsonData) else {
+        //                print("\(#line) Fail to decode [Category] jsonData.")
+        //                return
+        //            }
+        //
+        //            self.categorys = categoryObject
+        //            PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "SET categorys OK.")
+        //
+        //            //self.tableView.reloadData()
+        //
+        //        }
+        //
+        //
+        //        communicator.getAllProduct { (result, error) in
+        //            if let error = error {
+        //                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: \(error)")
+        //                return
+        //            }
+        //
+        //            guard let result = result else {
+        //                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: result is nil")
+        //                return
+        //            }
+        //
+        //            PrintHelper.println(tag: "ProductTableViewController", line: #line, "result OK.")
+        //
+        //            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
+        //                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to generate jsonData.")
+        //                return
+        //            }
+        //
+        //            let decoder = JSONDecoder()
+        //            guard let productObject = try? decoder.decode([Product].self, from: jsonData) else {
+        //                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to decode jsonData.")
+        //                return
+        //            }
+        //
+        //            self.products = productObject
+        //
+        //            // CLAER TABLE DrinkShopStoreLogAllProduct
+        //            self.logSQLite.delete(table: self.logSQLite.logTable_allProduct)
+        //
+        //            for product in self.products {
+        //                self.logSQLite.append(product)
+        //            }
+        //
+        //
+        //            PrintHelper.println(tag: "ProductTableViewController", line: #line, "PASSED: \(#function) OK")
+        //
+        //            //self.tableView.reloadData()
+        //
+        //        }
         
     }
     
@@ -178,6 +212,7 @@ class ProductTableViewController: UITableViewController {
         products = logSQLite.searchProductInCategory(to: category ?? "")
         let productList = products[indexPath.row]
         cell.productList = productList
+        
         
         self.communicator.getPhotoById(photoURL: Communicator.shared.PRODUCTSERVLET_URL, id: productList.id!) { (result, error) in
             if let error = error {

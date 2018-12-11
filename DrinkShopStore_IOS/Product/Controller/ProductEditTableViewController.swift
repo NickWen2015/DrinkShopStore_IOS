@@ -87,6 +87,7 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
         let tap = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         view.addGestureRecognizer(tap)
         
+        
     }
     
     
@@ -171,7 +172,6 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
         saveBarButtonItem.isEnabled = shouldEnable
         
     }
-    
     
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
         

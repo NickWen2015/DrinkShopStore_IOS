@@ -27,6 +27,22 @@
             </objects>
             <point key="canvasLocation" x="-711" y="120"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MED-k6-QIF">
+            <objects>
+                <navigationController id="h8b-mu-v4k" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LKa-R4-LGO">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dUe-fk-d60" kind="relationship" relationship="rootViewController" id="4d0-OJ-Vc3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EsS-8l-sLU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-42" y="-625"/>
+        </scene>
         <!--Code View Controller-->
         <scene sceneID="o5V-8S-1vl">
             <objects>
@@ -52,7 +68,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ioh-uB-D2B"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Iid-N8-qMR"/>
+                    <navigationItem key="navigationItem" id="Iid-N8-qMR">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="HL5-im-zZk">
+                            <connections>
+                                <segue destination="n2Y-oH-TmV" kind="unwind" unwindAction="unwindToOrderListWithSegue:" id="jT2-cA-Xj7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Vq5-Qu-TfD">
+                            <connections>
+                                <action selector="saveBtnPressed:" destination="dUe-fk-d60" id="edB-SN-W1v"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="previewImageView" destination="hbH-bc-SOT" id="Fy1-ml-Mq7"/>
                     </connections>
@@ -179,13 +206,10 @@
                     <navigationItem key="navigationItem" title="訂單管理" id="qVR-u1-Ns8">
                         <barButtonItem key="rightBarButtonItem" title="Scan QR Code" id="fOc-fZ-iXe">
                             <connections>
-                                <action selector="scanBtnPressed:" destination="Hin-9Q-s8a" id="qBd-ec-f3r"/>
+                                <segue destination="h8b-mu-v4k" kind="presentation" id="Q2F-XW-ffA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="previewImageView" destination="D1V-5j-ALh" id="mxi-Np-WvI"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAv-3E-KWE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -225,7 +249,7 @@
                         <viewLayoutGuide key="safeArea" id="Y0O-J0-RTy"/>
                     </view>
                     <navigationItem key="navigationItem" title="訂單明細" id="V6U-gA-rZv">
-                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="ASe-GM-2PR">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; 訂單管理" id="ASe-GM-2PR">
                             <connections>
                                 <segue destination="JTi-Fh-5Tv" kind="unwind" unwindAction="unwindToOrderListWithSegue:" id="zIO-Qy-emg"/>
                             </connections>
@@ -408,7 +432,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pfb-3k-lYW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1670" y="119"/>
+            <point key="canvasLocation" x="1775" y="116"/>
         </scene>
     </scenes>
     <resources>

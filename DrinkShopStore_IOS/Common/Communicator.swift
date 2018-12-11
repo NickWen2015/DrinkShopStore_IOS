@@ -16,6 +16,12 @@ let PASSWORD_KEY = "password"
 let ACTION_KEY = "action"
 let ID_KEY = "id"
 let IMAGESIZE_KEY = "imageSize"
+let PRODUCT_ID_KEY = "product_id" // 新增 by Peko
+let PRODUCT_KEY = "product" // 新增 by Peko
+let IMAGEBASE64_KEY = "imageBase64" // 新增 by Peko
+let ORDERID_KEY = "orderId" // 新增 by Peko
+let ORDERSTATUS_KEY = "orderStatus" // 新增 by Peko
+let CATEGORYNAME_KEY = "categoryName" // 新增 by Peko
 let NEWS_KEY = "news"
 let IMAGEBASE64 = "imageBase64"
 let SDATE_KEY = "sDate"
@@ -45,8 +51,8 @@ class Communicator {  //Singleton instance 單一實例模式
         return doPostForPhoto(urlString: photoURL, parameters: parameters, completion: completion)
     }
     
-    // 發Request到Server(圖片)
-    private func doPostForPhoto(urlString:String, parameters:[String: Any], completion: @escaping DownloadDoneHandler) {
+    // 發Request到Server(圖片) // 拿掉private by Peko
+    func doPostForPhoto(urlString:String, parameters:[String: Any], completion: @escaping DownloadDoneHandler) {
         Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseData { response in
             
             self.handlePhoto(response: response, completion: completion)

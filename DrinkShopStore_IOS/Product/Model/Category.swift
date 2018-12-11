@@ -8,24 +8,16 @@
 
 import Foundation
 
-struct Category {
-
-
-    var categoryName: String
-    var products: [Product]
-
+struct Category: Codable {
+    var id: Int?
+    var name: String?
+    
 }
 
-//class Category {
-//
-//
-//    var categoryName: String
-//    var products: [Product]
-//    init(categoryNamed: String, includeProducts: [Product]) {
-//        categoryName = categoryNamed
-//        products = includeProducts
-//    }
-//    class func getCategorys() -> [Category] {
-//        return []
-//    }
-//}
+extension Category {
+    enum CodingKeys: String, CodingKey {
+        case id = "category_id"
+        case name = "category_name"
+    }
+}
+

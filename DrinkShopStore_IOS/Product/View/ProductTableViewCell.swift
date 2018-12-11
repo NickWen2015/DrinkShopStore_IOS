@@ -10,20 +10,29 @@ import UIKit
 
 class ProductTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var productImageLabel: UILabel!
-    
+    @IBOutlet weak var productImageView: UIImageView!
+  
     @IBOutlet weak var productNameLabel: UILabel!
    
     @IBOutlet weak var unitPriceOfMediumSizeLabel: UILabel!
     
     @IBOutlet weak var unitPriceOfLargeSizeLabel: UILabel!
     
-    var product: Product? {
+    
+    var imageList: Data? {
         didSet {
-            productImageLabel.text = product?.productImage
-            productNameLabel.text = product?.productName
-            unitPriceOfMediumSizeLabel.text = product?.unitPriceOfMediumSize
-            unitPriceOfLargeSizeLabel.text = product?.unitPriceOfLargeSize
+            productImageView.image = UIImage(data: imageList!)
+        }
+    }
+    
+    var productList: Product? {
+        didSet {
+            
+            
+            productNameLabel.text = String(productList!.getName())
+            unitPriceOfMediumSizeLabel.text = String(productList!.getPriceM())
+            unitPriceOfLargeSizeLabel.text = String(productList!.getPriceL())
+
         }
     }
     

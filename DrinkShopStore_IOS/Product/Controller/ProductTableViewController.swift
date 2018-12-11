@@ -7,220 +7,207 @@
 //
 
 import UIKit
+import Photos
 
 class ProductTableViewController: UITableViewController {
-    var categorys: [Category] = []
-    var products = [Product]()
     
-  
+    var categorys: [Category] = []
+    var products: [Product] = []
+    
+    static let TAG = "ProductTableViewController"
+    let communicator = Communicator.shared
+    let logSQLite = LogSQLite()
+    
+    @IBAction func goBackFromAddDrink(segue: UIStoryboardSegue) {
+        
+        communicator.getAllProduct { (result, error) in
+            if let error = error {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: \(error)")
+                return
+            }
+            
+            guard let result = result else {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: result is nil")
+                return
+            }
+            
+            PrintHelper.println(tag: "ProductTableViewController", line: #line, "result OK.")
+            
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to generate jsonData.")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            guard let productObject = try? decoder.decode([Product].self, from: jsonData) else {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to decode jsonData.")
+                return
+            }
+            
+            self.products = productObject
+            
+            // CLAER TABLE DrinkShopStoreLogAllProduct
+            self.logSQLite.delete(table: self.logSQLite.logTable_allProduct)
+            
+            for product in self.products {
+                self.logSQLite.append(product)
+            }
+            
+            
+            PrintHelper.println(tag: "ProductTableViewController", line: #line, "PASSED: \(#function) OK")
+            
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        title = "商品管理"
+        // 準備資料
+        communicator.getAllCategory { (result, error) in
+            if let error = error {
+                PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "Error: \(error)")
+                return
+            }
+            
+            guard let result = result else {
+                PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "result is nil")
+                return
+            }
+            
+            PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "result OK.")
+            
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
+                print("\(#line) Fail to generate jsonData.")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            guard let categoryObject = try? decoder.decode([Category].self, from: jsonData) else {
+                print("\(#line) Fail to decode [Category] jsonData.")
+                return
+            }
+            
+            self.categorys = categoryObject
+            PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "SET categorys OK.")
+            
+            self.tableView.reloadData()
+            
+        }
         
-//        if let products = Product.load() {
-//            self.products = products
-//            tableView.reloadData()
-//        }
-        
-       
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
-        let tea = Category(categoryName: "tea", products: [Product(productImage: "drink001", productName: "綠茶", unitPriceOfMediumSize: "30", unitPriceOfLargeSize: "35"),Product(productImage: "drink002", productName: "紅茶", unitPriceOfMediumSize: "30", unitPriceOfLargeSize: "35")])
-        
-//        let tea = Category(categoryName: "tea",products: products)
-        
-        let milk = Category(categoryName: "milk", products: [Product(productImage: "drink003", productName: "奶茶", unitPriceOfMediumSize: "40", unitPriceOfLargeSize: "45")])
-        
-//        let milk = Category(categoryName: "milk", products: products)
-        
-        
-        let fruit = Category(categoryName: "fruit", products: [Product(productImage: "drink004", productName: "蘋果汁", unitPriceOfMediumSize: "50", unitPriceOfLargeSize: "55")])
-        
-//        let fruit = Category(categoryName: "fruit", products: products)
-        
-        categorys += [tea, milk, fruit]
-      
+        communicator.getAllProduct { (result, error) in
+            if let error = error {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: \(error)")
+                return
+            }
+            
+            guard let result = result else {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: result is nil")
+                return
+            }
+            
+            PrintHelper.println(tag: "ProductTableViewController", line: #line, "result OK.")
+            
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to generate jsonData.")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            guard let productObject = try? decoder.decode([Product].self, from: jsonData) else {
+                PrintHelper.println(tag: "ProductTableViewController", line: #line, "ERROR: Fail to decode jsonData.")
+                return
+            }
+            
+            self.products = productObject
+            
+            // CLAER TABLE DrinkShopStoreLogAllProduct
+            self.logSQLite.delete(table: self.logSQLite.logTable_allProduct)
+            
+            for product in self.products {
+                self.logSQLite.append(product)
+            }
+            
+            
+            PrintHelper.println(tag: "ProductTableViewController", line: #line, "PASSED: \(#function) OK")
+            
+            self.tableView.reloadData()
+            
+        }
         
         //啟用naviation導覽列上的編輯tableView紐
         navigationItem.leftBarButtonItem = editButtonItem
         
         //開啟Cell自動列高
-//        tableView.rowHeight =
-//            UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 44.0
-        
         tableView.rowHeight =
             UITableView.automaticDimension
-        tableView.estimatedRowHeight = tableView.rowHeight
-       
-    }
-    
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let label = UILabel()
-//        label.text = "p"
-//        label.backgroundColor = UIColor.lightGray
-//        return label
-//        
-//    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        // 註冊通知
-        NotificationCenter.default.addObserver(self, selector: #selector(save), name: UIApplication.willResignActiveNotification, object: nil)
-        
+        tableView.estimatedRowHeight = 44.0
+        //        tableView.estimatedRowHeight = tableView.rowHeight
         
     }
+    
     // 解除註冊
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func save() {
-        Product.save(products)
-    }
-
-
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return categorys.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-//        return categorys[section].product.count
-        return categorys[section].products.count
-        // return products.count
+        
+        let category = categorys[section].name
+        products = logSQLite.searchProductInCategory(to: category ?? "")
+        return products.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as!ProductTableViewCell
-
         // Configure the cell...
         
-        
         // 取得
-//        let category = categorys[indexPath.section]
-//        let product = category.product[indexPath.row]
-
+        let category = categorys[indexPath.section].name
+        products = logSQLite.searchProductInCategory(to: category ?? "")
+        let productList = products[indexPath.row]
+        cell.productList = productList
         
-        let category = categorys[indexPath.section]
-        let products = category.products
-        let product = products[indexPath.row]
+        self.communicator.getPhotoById(photoURL: Communicator.shared.PRODUCTSERVLET_URL, id: productList.id!) { (result, error) in
+            if let error = error {
+                PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "Error: \(error)")
+                return
+            }
+            
+            guard let data = result else {
+                PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "result is nil")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                cell.productImageView.image = UIImage(data: data)
+            }
+            
+        }
         
-        cell.product = product
-
-
         return cell
-    
+        
     }
     
-
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let category = categorys[section].categoryName
-//        return category
         
         let category = categorys[section]
-        return category.categoryName
+        return category.name
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // Unwind Segue
     @IBAction func unwindToProductList(segue: UIStoryboardSegue) {
-        guard segue.identifier == "saveProduct" else {
-            return}
-        // 新增product
-        // 取得剛才使用者建立的product
-        let source = segue.source as! ProductEditeTableViewController
-//        if let category = source.category {
-//            // 判斷使用者有沒有點選其中某列
-//            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-//                // 修改category
-//                categorys[selectedIndexPath.section] = category
-//                
-//                // 重新整理該indexpath畫面
-//                tableView.reloadSections([0], with: .automatic)
-//                
-//            } else {
-//                // 將最新的category插入到TableView
-//                // 準備一個新的indexpath
-//                // let indexpath = IndexPath(row: products.count, section: 0)
-//                // 將category插入陣列
-//                categorys.append(category)
-//                tableView.insertSections([0], with: .automatic)
-//                
-//            }
-//        }
-        if let product = source.product {
-            // 判斷使用者有沒有點選其中某列
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // 修改product
-                var category = categorys[selectedIndexPath.section]
-                category.products[selectedIndexPath.row] = product
-                // 重新整理該indexpath畫面
-                tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-            } else {
-                // 將最新的product插入到TableView
-                // 準備一個新的indexpath
-                let indexpath = IndexPath(row: products.count, section: 0)
-                // 將product插入陣列
-                products.append(product)
-                tableView.insertRows(at: [indexpath], with: .automatic)
-            }
-        }
-        
         
     }
     
@@ -230,68 +217,115 @@ class ProductTableViewController: UITableViewController {
     }
     
     
-    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            var category = categorys[indexPath.section]
-            category.products.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
             
+            let category = categorys[indexPath.section].name
+            products = logSQLite.searchProductInCategory(to: category ?? "")
+            let productList = products[indexPath.row]
+            
+            //寫入資料庫
+            self.communicator.productDelete(product_id: productList.id!) { (result, error) in
+                if let error = error {
+                    print("Delete products fail: \(error)")
+                    return
+                }
+                
+                guard let updateStatus = result as? Int else {
+                    assertionFailure("modify fail.")
+                    return
+                }
+                
+                if updateStatus == 1 {
+                    //跳出成功視窗
+                    let alertController = UIAlertController(title: "完成", message:
+                        "刪除成功", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "確定", style: .default,handler: nil))
+                    self.present(alertController, animated: false, completion: nil)
+                    self.viewDidLoad()
+                    self.tableView.reloadData()
+                    
+                } else {
+                    let alertController = UIAlertController(title: "失敗", message:
+                        "刪除失敗", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "確定", style: .default,handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
             
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            
         }
     }
-    
-    
-    
-    
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // 看看使用者選到了哪一個indexpath
+        //         看看使用者選到了哪一個indexpath
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            
             // 取得該indexpat的product
-            //let product = products[selectedIndexPath.row]
+            let categoryEdit = categorys[selectedIndexPath.section]
+            let category = categorys[selectedIndexPath.section].name
+            products = logSQLite.searchProductInCategory(to: category ?? "")
+            let productEdit = products[selectedIndexPath.row]
             
-            let category = categorys[selectedIndexPath.section]
-            let product = category.products[selectedIndexPath.row]
-            
-            // 取得下一頁
-            let destination = segue.destination as!
-            UINavigationController
-            let productTableVC = destination.topViewController as!
-            ProductEditeTableViewController
-            // 將product放在下一頁
-            productTableVC.category = category
-            productTableVC.product = product
-            
+            communicator.getPhotoById(photoURL: Communicator.shared.PRODUCTSERVLET_URL, id: productEdit.id!) { (result, error) in
+                if let error = error {
+                    PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "Error: \(error)")
+                    return
+                }
+                
+                guard let data = result else {
+                    PrintHelper.println(tag: ProductTableViewController.TAG, line: #line, "result is nil")
+                    return
+                }
+                
+                // 取得下一頁
+                let destination = segue.destination as!
+                UINavigationController
+                let productTableVC = destination.topViewController as!
+                ProductEditTableViewController
+                
+                
+                // 將product放在下一頁
+                productTableVC.product = productEdit
+                productTableVC.categoryNameField.text = categoryEdit.name
+                productTableVC.productNameField.text = productEdit.name
+                productTableVC.unitPriceOfMediumSizeField.text = String(productEdit.priceM!)
+                productTableVC.unitPriceOfLargeSizeField.text = String(productEdit.priceL!)
+                productTableVC.productImageView.image = UIImage(data: data)
+            }
             
         }
     }
     
-    
-    
+}
 
+extension Communicator {
+    
+    // 取得全部的類別
+    func getAllCategory(completion: @escaping DoneHandler) {
+        let urlString = Communicator.shared.PRODUCTSERVLET_URL
+        let parameters: [String: Any] = [ACTION_KEY: "getAllCategory"]
+        doPost(urlString: urlString, parameters: parameters, completion: completion)
+    }
+    
+    // 取得全部的商品
+    func getAllProduct(completion: @escaping DoneHandler) {
+        let urlString = Communicator.shared.PRODUCTSERVLET_URL
+        let parameters: [String: Any] = [ACTION_KEY: "getAllProduct"]
+        doPost(urlString: urlString, parameters: parameters, completion: completion)
+    }
+    
+    // 刪除商品
+    func productDelete(product_id: Int, completion: @escaping DoneHandler) {
+        let urlString = Communicator.shared.PRODUCTSERVLET_URL
+        let parameters: [String: Any] = [ACTION_KEY: "productDelete", PRODUCT_ID_KEY: product_id]
+        doPost(urlString: urlString, parameters: parameters, completion: completion)
+    }
+    
 }

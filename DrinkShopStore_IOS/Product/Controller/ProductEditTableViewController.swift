@@ -124,7 +124,7 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
     
     
     @IBAction func addCategory(_ sender: UIButton) {
-        let title = "請輸入要'新增'的類別名稱"
+        let title = "請輸入要新增的類別名稱"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "類別名稱"

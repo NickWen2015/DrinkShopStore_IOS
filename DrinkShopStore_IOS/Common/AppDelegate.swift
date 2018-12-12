@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import UserNotifications
+
+extension Notification.Name {
+    static let didReceiveNotification = Notification.Name("didReceiveNotification")
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Ask user's authorization.取得user同意
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (grant, error) in
+            if let error = error {
+                print("Fail to requestAuthorization: \(error)")
+                return
+            }
+            print("User grant the permission.")
+        }
+        //Register for remote notification. 發出要求註冊遠端通知, APNS會給一個device token
+        application.registerForRemoteNotifications()
+        
         return true
     }
 
@@ -42,5 +60,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    //MARK: - APNS Support.
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {//註冊成功拿到device token
+        print("didRegisterForRemoteNotificationsWithDeviceToken: \(deviceToken.description)")
+        
+        //        let tokenString = deviceToken.map { (byte) -> String in
+        //            return String(format: "%02x", byte) //x表16進位,2位數,不足位補0
+        //        }.joined()//joined() >> string array to string
+        
+        let tokenString = deviceToken.map { String(format: "%02x", $0) //closure 簡化寫法
+            }.joined()//joined() >> string array to string
+        print("tokenString: \(tokenString)")
+        
+        let member_name = "drinkShop客服人員"
+//        if let name = UserDefaults.standard.value(forKey: "member_name") as? String {
+//            member_name = name
+//        }
+        
+        ChatCommunicator.shared.update(deviceToken: tokenString, userName: member_name) {
+            (result, error) in
+            if let error = error {
+                print("update deviceToken fail: \(error)")
+                return
+            } else if let result = result {
+                print("update deviceToken OK: \(result)")
+            }
+            
+        }
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {//註冊失敗拿不到device token,可能為網路因素
+        print("didFailToRegisterForRemoteNotificationsWithError: \(error)")
+    }
+    //1.當收到新訊息,且app正在前景運作
+    //2.使用者按下通知中心其中一個訊息
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("didReceiveRemoteNotification APNS Payload酬載: \(userInfo)")
+        
+        let state = application.applicationState
+        
+        //active(在前景),inactive(電話進來),background(在背景)
+        if state == .active {
+            NotificationCenter.default.post(name: .didReceiveNotification, object: nil)
+            
+        } else if state == .background {
+            // ...
+            completionHandler(.newData)
+        }
+        
+    }
 }
-

@@ -51,11 +51,26 @@
                         <segue destination="oPN-3d-LR9" kind="relationship" relationship="viewControllers" id="9rS-y2-sX7"/>
                         <segue destination="pFW-sn-QcM" kind="relationship" relationship="viewControllers" id="Tsh-Ii-jaP"/>
                         <segue destination="JB8-P1-8f6" kind="relationship" relationship="viewControllers" id="xgp-fe-ABn"/>
+                        <segue destination="HqO-Ev-PpE" kind="relationship" relationship="viewControllers" id="OoN-3M-55C"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2M-m9-H2S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1167" y="-36"/>
         </scene>
+        <!--ChatRoomNavigationView-->
+        <scene sceneID="gpB-ER-Xar">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ChatRoom" referencedIdentifier="ChatRoomNavigationView" id="HqO-Ev-PpE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="線上客服" image="orderonline" selectedImage="orderonline_selected" id="94o-wf-xqF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S7r-BE-m7B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1783" y="425"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="orderonline" width="16" height="16"/>
+        <image name="orderonline_selected" width="16" height="16"/>
+    </resources>
 </document>

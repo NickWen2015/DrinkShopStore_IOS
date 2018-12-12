@@ -31,6 +31,20 @@ class LogSQLite {
     
     var productCount = [String]()
     
+    //聊天相關資料表
+    static let tableName = "messageLog"
+    static let midKey = "mid"
+    static let idKey = "id"
+    static let typeKey = "type"
+    static let messageKey = "message"
+    static let usernameKey = "username"
+    var midColumn = Expression<Int64>(midKey)//對應欄位
+    var idChatColumn = Expression<Int64>(idKey)//對應欄位
+    var typeColumn = Expression<Int64>(typeKey)//對應欄位
+    var messageColumn = Expression<String>(messageKey)//對應欄位
+    var usernameColumn = Expression<String>(usernameKey)//對應欄位
+    var logMessageTable = Table(tableName)//聊天資料表
+    
     init() {
         // Prepare DB filename/path.
         let filemanager = FileManager.default
@@ -64,8 +78,18 @@ class LogSQLite {
                     builder.column(priceMColumn)
                     builder.column(priceLColumn)
                 }
+                //聊天資料表
+                let command_logMessage = logMessageTable.create { (builder) in
+                    builder.column(midColumn, primaryKey: true)//PK
+                    builder.column(idChatColumn)//依序建立
+                    builder.column(messageColumn)//依序建立
+                    builder.column(typeColumn)//依序建立
+                    builder.column(usernameColumn)//依序建立
+                }
+                
                 //                try db.run(command_version)
                 try db.run(command_allProduct)
+                try db.run(command_logMessage)
                 PrintHelper.println(tag: "LogSQLite", line: #line, "DB CREATE OK!")
                 
                 // 加入初始值

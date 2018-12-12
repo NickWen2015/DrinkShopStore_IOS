@@ -32,12 +32,14 @@
 		6EBA702C21B9B5B6007A9618 /* OrderDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA702B21B9B5B6007A9618 /* OrderDetailTableViewController.swift */; };
 		6EC862CD21BEF5C00093B363 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC862CC21BEF5C00093B363 /* QRCodeViewController.swift */; };
 		7B2B017B218D7E9E00FE1469 /* ActivitiesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2B017A218D7E9E00FE1469 /* ActivitiesListTableViewController.swift */; };
+		7B99ECA9219D4AC000CF4838 /* img_product_drink_shop.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B99ECA8219D4AC000CF4838 /* img_product_drink_shop.png */; };
 		7BA0609A219D64D700F08645 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA06099219D64D700F08645 /* Common.swift */; };
 		7BAD1B78218D8F1A00D66B0C /* ActivitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD1B77218D8F1A00D66B0C /* ActivitiesTableViewController.swift */; };
 		7BAD1B7A218D93D800D66B0C /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD1B79218D93D800D66B0C /* NewsItem.swift */; };
 		7BAD1B7C218D96E400D66B0C /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD1B7B218D96E400D66B0C /* UIImage+Resize.swift */; };
 		7BAD1BBE2191B65500D66B0C /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAD1BBD2191B65500D66B0C /* ActivitiesTableViewCell.swift */; };
 		7BFE72AA219210A5006C700B /* Communicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFE72A9219210A5006C700B /* Communicator.swift */; };
+		7BFE72B62192E30D006C700B /* photo-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFE72B52192E30C006C700B /* photo-camera.png */; };
 		7BFE72C421941E0D006C700B /* Order.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BFE72C321941E0D006C700B /* Order.storyboard */; };
 		7BFE72C621941E19006C700B /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BFE72C521941E19006C700B /* Product.storyboard */; };
 		8B197672EB2D512D532B3A42 /* Pods_DrinkShopStore_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 669AAC6382993E52A34828F9 /* Pods_DrinkShopStore_IOS.framework */; };
@@ -85,12 +87,14 @@
 		6EBA702B21B9B5B6007A9618 /* OrderDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewController.swift; sourceTree = "<group>"; };
 		6EC862CC21BEF5C00093B363 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		7B2B017A218D7E9E00FE1469 /* ActivitiesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListTableViewController.swift; sourceTree = "<group>"; };
+		7B99ECA8219D4AC000CF4838 /* img_product_drink_shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_product_drink_shop.png; sourceTree = "<group>"; };
 		7BA06099219D64D700F08645 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		7BAD1B77218D8F1A00D66B0C /* ActivitiesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewController.swift; sourceTree = "<group>"; };
 		7BAD1B79218D93D800D66B0C /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
 		7BAD1B7B218D96E400D66B0C /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		7BAD1BBD2191B65500D66B0C /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
 		7BFE72A9219210A5006C700B /* Communicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communicator.swift; sourceTree = "<group>"; };
+		7BFE72B52192E30C006C700B /* photo-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo-camera.png"; sourceTree = "<group>"; };
 		7BFE72C321941E0D006C700B /* Order.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Order.storyboard; sourceTree = "<group>"; };
 		7BFE72C521941E19006C700B /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		B759144AEEAACC6CD3303417 /* Pods-DrinkShopStore_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrinkShopStore_IOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrinkShopStore_IOS/Pods-DrinkShopStore_IOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -211,13 +215,11 @@
 		7BFE72BA2193F2CA006C700B /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				7B99ECA8219D4AC000CF4838 /* img_product_drink_shop.png */,
 				7BFE72BE2193F3AC006C700B /* View */,
 				7BFE72B72193F265006C700B /* Controller */,
-<<<<<<< Updated upstream
 				6EBA701D21B8D656007A9618 /* Activity.storyboard */,
 				7BFE72B52192E30C006C700B /* photo-camera.png */,
-=======
->>>>>>> Stashed changes
 				7BFE72BD2193F390006C700B /* Model */,
 			);
 			path = Activity;
@@ -260,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				7BAD1BBD2191B65500D66B0C /* ActivitiesTableViewCell.swift */,
-				7B2B0178218D5FDA00FE1469 /* Activity.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -356,21 +357,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B310E3A2169401F00EBAEA2 /* LaunchScreen.storyboard in Resources */,
-<<<<<<< Updated upstream
 				7B99ECA9219D4AC000CF4838 /* img_product_drink_shop.png in Resources */,
 				6EBA701221B7F3FB007A9618 /* camera_btn.png in Resources */,
-=======
-				7B2B0179218D5FDA00FE1469 /* Activity.storyboard in Resources */,
->>>>>>> Stashed changes
 				7BFE72C621941E19006C700B /* Product.storyboard in Resources */,
 				6EBA701021B7F3F6007A9618 /* drink_default.png in Resources */,
 				2B310E372169401F00EBAEA2 /* Assets.xcassets in Resources */,
 				2B310E352169401E00EBAEA2 /* Main.storyboard in Resources */,
-<<<<<<< Updated upstream
 				6EBA701E21B8D657007A9618 /* Activity.storyboard in Resources */,
 				7BFE72B62192E30D006C700B /* photo-camera.png in Resources */,
-=======
->>>>>>> Stashed changes
 				7BFE72C421941E0D006C700B /* Order.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

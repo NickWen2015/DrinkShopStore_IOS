@@ -10,7 +10,7 @@ import UIKit
 import Photos
 import MobileCoreServices
 
-class ActivitiesTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
+class ActivitiesTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var activityNameTextfield: UITextField!
@@ -72,19 +72,19 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         endDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         
         
+        //                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ActivitiesTableViewController.viewTapped(gestureRecognize:)))
+        //
+        //                view.addGestureRecognizer(tapGesture)
+        
     }
     
-    @IBAction private func textFieldBeginEditing(_ sender: Any) {
+    @IBAction func textFieldBeginEditing(_ sender: Any) {
         updateSaveButtonState()
     }
     
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    @objc func viewTapped(gestureRecognize: UITapGestureRecognizer){
+        view.endEditing(true)
     }
-    
-    
     @objc func datePickerValueChanged (datePicker: UIDatePicker) {
         
         let dateformatter = DateFormatter()
@@ -246,7 +246,7 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
     }
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
-        
+   
         guard let selectedImage = activityImage.image else {
             print("Image not found!")
             return
@@ -259,7 +259,7 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         
         
         let newsItem = NewsItem(id: id_value, name: activityName, sDate: activitySDate, eDate: activityEDate)
-        
+
         
         if self.newsItem != nil {
             let id = self.newsItem?.id
@@ -366,7 +366,7 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
             }
         }
     }
-    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

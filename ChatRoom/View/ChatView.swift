@@ -160,6 +160,9 @@ fileprivate class ChatBubbleView: UIView {
             return
         }
         
+        let index = text.index(of: "(")
+        let textMessage = text.prefix(upTo: index!)
+        
         // Decide x and y.
         var x = contentMargin
         let y = currentY + textFontSize/2//圖片與文字有間隔距離
@@ -178,7 +181,7 @@ fileprivate class ChatBubbleView: UIView {
         self.textLabel = label
         label.font = UIFont.systemFont(ofSize: textFontSize)//字體
         label.numberOfLines = 0 //Important! 讓label決定內容有幾行,寬度固定
-        label.text = text
+        label.text = String(textMessage)
         label.sizeToFit() //Important! label處理好寬高部分
         
         self.addSubview(label)//加到泡泡view

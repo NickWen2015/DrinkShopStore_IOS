@@ -135,7 +135,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qP6-4K-4hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="559" y="-99"/>
+            <point key="canvasLocation" x="535" y="-99"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aMM-fb-9TK">
@@ -342,6 +342,6 @@
         <image name="product_selected" width="37.5" height="37.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kuz-f5-4Vb"/>
+        <segue reference="vVm-hO-iJ6"/>
     </inferredMetricsTieBreakers>
 </document>

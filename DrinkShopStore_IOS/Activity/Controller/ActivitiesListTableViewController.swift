@@ -31,14 +31,10 @@ class ActivitiesListTableViewController: UITableViewController {
     let PHOTO_URL = Common.SERVER_URL + "NewsServlet"
     
     
-    
-    
-    
     @IBOutlet var newsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         
         //啟用 navigation 導覽列上的編輯 tableView 鈕
@@ -100,6 +96,10 @@ class ActivitiesListTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func goBackFromAddNews(segue: UIStoryboardSegue) {
+        
+        viewDidLoad()
+    }
     
     
     // MARK: - Table view data source
@@ -118,7 +118,7 @@ class ActivitiesListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ActivitiesTableViewCell
     
         let id = newsIdArray[indexPath.row]
-        
+        cell.activityImage.image = UIImage(named: "img_product_drink_shop")
         Communicator.shared.getPhotoById(photoURL: self.PHOTO_URL, id: id) { (result, error) in
             
             guard let data = result else {

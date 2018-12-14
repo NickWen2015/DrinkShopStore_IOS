@@ -10,7 +10,7 @@ import UIKit
 import Photos
 import MobileCoreServices
 
-class ActivitiesTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class ActivitiesTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
     
     @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var activityNameTextfield: UITextField!
@@ -71,15 +71,18 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         startDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         endDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         
-        
-        //                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ActivitiesTableViewController.viewTapped(gestureRecognize:)))
-        //
-        //                view.addGestureRecognizer(tapGesture)
+    
         
     }
     
-    @IBAction func textFieldBeginEditing(_ sender: Any) {
+    
+    @IBAction private func textFieldBeginEditing(_ sender: Any) {
         updateSaveButtonState()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @objc func viewTapped(gestureRecognize: UITapGestureRecognizer){
@@ -198,7 +201,7 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
         
         present(picker, animated: true)
     }
-    
+   
     
     //MARK: - UIImagePickerControllerDelegate protocol Method.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -242,11 +245,14 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
     }
     
     func convertImageToBase64(image: UIImage) -> String {
-        let imageData = image.pngData()!
-        return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+//        let imageData = image.pngData()!
+        let imageData = image.jpegData(compressionQuality:0.8)
+//        return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
+        return imageData!.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
     }
+    
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
-   
+   print(saveBtnPressed)
         guard let selectedImage = activityImage.image else {
             print("Image not found!")
             return
@@ -297,9 +303,13 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
                     //跳出成功視窗
                     let alertController = UIAlertController(title: "完成", message:
                         "儲存成功", preferredStyle: .alert)
+//                    let okBtn = UIAlertAction(title: "確認", style: .default,handler: { _ in
+//                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "newsList") as! ActivitiesListTableViewController
+//                        self.present(VC, animated: true, completion: nil)
+//                    })
                     let okBtn = UIAlertAction(title: "確認", style: .default,handler: { _ in
-                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "newsList") as! ActivitiesListTableViewController
-                        self.present(VC, animated: true, completion: nil)
+                        self.performSegue(withIdentifier: "goBackFromAddNewsWithSegue", sender: nil)
+                        
                     })
                     alertController.addAction(okBtn)
                     self.present(alertController, animated: true)
@@ -347,10 +357,17 @@ class ActivitiesTableViewController: UITableViewController, UIImagePickerControl
                     //跳出成功視窗
                     let alertController = UIAlertController(title: "完成", message:
                         "儲存成功", preferredStyle: .alert)
+//                    let okBtn = UIAlertAction(title: "確認", style: .default,handler: { _ in
+//                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "newsList") as! ActivitiesListTableViewController
+//                        self.present(VC, animated: true, completion: nil)
+//                    })
                     let okBtn = UIAlertAction(title: "確認", style: .default,handler: { _ in
-                        let VC = self.storyboard?.instantiateViewController(withIdentifier: "newsList") as! ActivitiesListTableViewController
-                        self.present(VC, animated: true, completion: nil)
+                        self.performSegue(withIdentifier: "goBackFromAddNewsWithSegue", sender: nil)
+
                     })
+                    
+                    
+                    
                     alertController.addAction(okBtn)
                     self.present(alertController, animated: true)
                     //儲存按鈕消失

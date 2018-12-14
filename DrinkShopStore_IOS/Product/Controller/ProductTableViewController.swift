@@ -308,7 +308,7 @@ class ProductTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //         看看使用者選到了哪一個indexpath
+        // 看看使用者選到了哪一個indexpath
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             
             // 取得該indexpat的product

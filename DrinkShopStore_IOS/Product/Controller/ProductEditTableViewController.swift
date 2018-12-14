@@ -124,7 +124,7 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
     
     
     @IBAction func addCategory(_ sender: UIButton) {
-        let title = "請輸入要新增的類別名稱"
+        let title = "請輸入要'新增'的類別名稱"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "類別名稱"
@@ -360,12 +360,12 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
                 return
             }
             let resizedImage = originalImage.resize(maxEdge: 1024)!
-            let jpgData = resizedImage.jpegData(compressionQuality: 0.8)//壓縮率:0.0~1之間,為了品質一般都控制在0.7~0.8
+            let jpgData = resizedImage.jpegData(compressionQuality: 0.1)//壓縮率:0.0~1之間,為了品質一般都控制在0.7~0.8
+            
             
             let pngData = resizedImage.pngData()
             print("jpgData: \(jpgData!.count)")
             print("pngData: \(pngData!.count)")
-            
             
             productImageView.image = resizedImage
             
@@ -375,7 +375,9 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
     }
     
     func convertImageToBase64(image: UIImage) -> String {
-        let imageData = image.pngData()!
+//        let imageData = image.pngData()!
+        let imageData = image.jpegData(compressionQuality: 0.1)!
+       
         return imageData.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters)
     }
     

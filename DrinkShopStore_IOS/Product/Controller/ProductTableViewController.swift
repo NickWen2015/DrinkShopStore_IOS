@@ -20,7 +20,7 @@ class ProductTableViewController: UITableViewController {
     
     @IBAction func goBackFromAddDrink(segue: UIStoryboardSegue) {
         
-        viewDidLoad()
+        self.viewDidLoad()
         
         //        communicator.getAllCategory { (result, error) in
         //            if let error = error {
@@ -225,8 +225,17 @@ class ProductTableViewController: UITableViewController {
                 return
             }
             
-            DispatchQueue.main.async {
-                cell.productImageView.image = UIImage(data: data)
+            if let currentIndexPath = tableView.indexPath(for: cell),currentIndexPath == indexPath {
+                
+                DispatchQueue.main.async {
+                    cell.productImageView.image = UIImage(data: data)
+                    
+                    cell.productNameLabel.text = String(productList.getName())
+                    cell.unitPriceOfMediumSizeLabel.text = String(productList.getPriceM())
+                    cell.unitPriceOfLargeSizeLabel.text = String(productList.getPriceL())
+                    
+                }
+                
             }
             
         }
@@ -303,7 +312,7 @@ class ProductTableViewController: UITableViewController {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             
             // 取得該indexpat的product
-            let categoryEdit = categorys[selectedIndexPath.section]
+            //let categoryEdit = categorys[selectedIndexPath.section]
             let category = categorys[selectedIndexPath.section].name
             products = logSQLite.searchProductInCategory(to: category ?? "")
             let productEdit = products[selectedIndexPath.row]
@@ -325,14 +334,16 @@ class ProductTableViewController: UITableViewController {
                 let productTableVC = destination.topViewController as!
                 ProductEditTableViewController
                 
-                
-                // 將product放在下一頁
-                productTableVC.product = productEdit
-                productTableVC.categoryNameField.text = categoryEdit.name
-                productTableVC.productNameField.text = productEdit.name
-                productTableVC.unitPriceOfMediumSizeField.text = String(productEdit.priceM!)
-                productTableVC.unitPriceOfLargeSizeField.text = String(productEdit.priceL!)
-                productTableVC.productImageView.image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    
+                    // 將product放在下一頁
+                    productTableVC.product = productEdit
+                    productTableVC.categoryNameField.text = productEdit.category
+                    productTableVC.productNameField.text = productEdit.name
+                    productTableVC.unitPriceOfMediumSizeField.text = String(productEdit.priceM!)
+                    productTableVC.unitPriceOfLargeSizeField.text = String(productEdit.priceL!)
+                    productTableVC.productImageView.image = UIImage(data: data)
+                }
             }
             
         }

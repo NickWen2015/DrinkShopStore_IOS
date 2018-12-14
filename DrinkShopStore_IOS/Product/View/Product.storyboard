@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,6 +17,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FVH-o5-wNw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="GSd-nz-SYN" kind="relationship" relationship="rootViewController" id="r7a-bv-HCQ"/>
@@ -42,11 +45,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qjY-wz-Xlt" userLabel="Product Image View">
-                                            <rect key="frame" x="20" y="34" width="115" height="65.5"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="251" image="drink_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="qjY-wz-Xlt" userLabel="Product Image View">
+                                            <rect key="frame" x="20" y="25" width="85" height="85"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="85" id="0Sg-7Y-Sua"/>
+                                                <constraint firstAttribute="width" constant="85" id="usg-Go-KxG"/>
+                                            </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="t1c-lb-Rhd">
-                                            <rect key="frame" x="193.5" y="34" width="63" height="65.5"/>
+                                            <rect key="frame" x="175" y="34" width="63" height="65.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E88-GF-OYQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="63" height="20.5"/>
@@ -95,13 +102,12 @@
                                     <constraints>
                                         <constraint firstItem="t1l-Qn-NfR" firstAttribute="top" secondItem="m4x-Id-ArP" secondAttribute="topMargin" constant="21" id="0X5-Xm-2n6"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="t1c-lb-Rhd" secondAttribute="bottom" constant="24.5" id="Ebu-cZ-jlF"/>
-                                        <constraint firstItem="qjY-wz-Xlt" firstAttribute="top" secondItem="m4x-Id-ArP" secondAttribute="topMargin" constant="23" id="IqY-LE-txp"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="qjY-wz-Xlt" secondAttribute="bottom" constant="24.5" id="XWi-on-jNs"/>
+                                        <constraint firstItem="qjY-wz-Xlt" firstAttribute="top" secondItem="m4x-Id-ArP" secondAttribute="topMargin" constant="14" id="IqY-LE-txp"/>
+                                        <constraint firstItem="t1c-lb-Rhd" firstAttribute="leading" secondItem="qjY-wz-Xlt" secondAttribute="trailing" constant="70" id="TP1-Ga-LXY"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="qjY-wz-Xlt" secondAttribute="bottom" constant="14" id="XWi-on-jNs"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="t1l-Qn-NfR" secondAttribute="bottom" constant="22" id="c0i-BC-LK2"/>
                                         <constraint firstItem="t1c-lb-Rhd" firstAttribute="top" secondItem="m4x-Id-ArP" secondAttribute="topMargin" constant="23" id="lsc-lY-6Q2"/>
-                                        <constraint firstItem="t1c-lb-Rhd" firstAttribute="leading" secondItem="qjY-wz-Xlt" secondAttribute="trailing" constant="58.5" id="pGJ-wn-2JL"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="t1l-Qn-NfR" secondAttribute="trailing" constant="10" id="v2D-ZJ-A4v"/>
-                                        <constraint firstItem="t1l-Qn-NfR" firstAttribute="leading" secondItem="t1c-lb-Rhd" secondAttribute="trailing" constant="45" id="xPZ-TD-54V"/>
                                         <constraint firstItem="qjY-wz-Xlt" firstAttribute="leading" secondItem="m4x-Id-ArP" secondAttribute="leadingMargin" constant="4" id="yBk-2n-CIe"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -129,7 +135,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qP6-4K-4hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="532" y="-98.50074962518741"/>
+            <point key="canvasLocation" x="559" y="-99"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aMM-fb-9TK">
@@ -165,7 +171,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eUD-Ca-jrH" userLabel="Category Name Field">
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選擇類別" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eUD-Ca-jrH" userLabel="Category Name Field">
                                                     <rect key="frame" x="16" y="7" width="180" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
@@ -194,16 +200,19 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="95" id="cKa-Se-DO5">
                                         <rect key="frame" x="0.0" y="155.5" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cKa-Se-DO5" id="zTA-0H-nXg">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cKa-Se-DO5" id="zTA-0H-nXg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="drink_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="cHv-kH-umq" userLabel="Product Image  View">
-                                                    <rect key="frame" x="16" y="11" width="131" height="73"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drink_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="cHv-kH-umq" userLabel="Product Image  View">
+                                                    <rect key="frame" x="15" y="10.5" width="85" height="85"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="85" id="eiE-gg-Cqm"/>
+                                                        <constraint firstAttribute="width" constant="85" id="ypE-Q6-wTm"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0y0-fr-dXJ">
-                                                    <rect key="frame" x="110" y="55" width="20" height="22"/>
+                                                    <rect key="frame" x="80" y="62" width="20" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="camera icon" image="camera_btn.png"/>
                                                     <connections>
@@ -211,6 +220,11 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cHv-kH-umq" firstAttribute="top" secondItem="zTA-0H-nXg" secondAttribute="top" constant="10" id="7kY-CJ-NSY"/>
+                                                <constraint firstAttribute="bottom" secondItem="cHv-kH-umq" secondAttribute="bottom" constant="10" id="dSJ-3D-r1P"/>
+                                                <constraint firstItem="cHv-kH-umq" firstAttribute="leading" secondItem="zTA-0H-nXg" secondAttribute="leading" constant="15" id="ttC-hC-B9a"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

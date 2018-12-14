@@ -53,8 +53,7 @@ class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputOb
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+     
         // 準備資料
         communicator.getAllOrder { (result, error) in
             if let error = error {
@@ -145,6 +144,12 @@ class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputOb
             // 取得下一頁
             let orderDetailVC = segue.destination as!
             OrderDetailViewController
+            
+//            let destination = segue.destination as!
+//            UINavigationController
+//            let orderDetailVC = destination.topViewController as!
+//            OrderDetailViewController
+            
             
             guard let orderId = orderDetailDisplay.orderId else {
                 print("ERROR: orderId is nil")

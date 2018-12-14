@@ -196,7 +196,7 @@
                                     <outlet property="memberNameLabel" destination="Zxs-cn-BGg" id="F4U-rb-Bvn"/>
                                     <outlet property="orderAcceptTimeLabel" destination="DUN-WR-ged" id="Bfp-tx-Vxy"/>
                                     <outlet property="orderIdLabel" destination="KuM-ml-abw" id="T0a-gn-jyz"/>
-                                    <segue destination="Yxd-mH-Cuc" kind="presentation" id="FhT-gM-5ls"/>
+                                    <segue destination="Yxd-mH-Cuc" kind="show" id="S5K-eZ-88Z"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -247,19 +247,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-ed-vnJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="Ksd-1x-bHL">
-                                        <barButtonItem key="leftBarButtonItem" title="&lt; 訂單管理" id="nhG-1E-WB7">
-                                            <connections>
-                                                <segue destination="LfC-hv-FTV" kind="unwind" unwindAction="unwindToOrderListWithSegue:" id="5iA-sb-1Qo"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="訂單明細：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsz-4X-j7e" userLabel="訂單明細：">
                                 <rect key="frame" x="58" y="141" width="111" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -272,15 +259,15 @@
                         <viewLayoutGuide key="safeArea" id="Y0O-J0-RTy"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="XmX-N4-gt6"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="orderDetailIdLabel" destination="j1X-L7-LnC" id="3zD-h7-NPi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyU-mr-CFJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="LfC-hv-FTV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="861.60000000000002" y="507.79610194902551"/>
+            <point key="canvasLocation" x="887" y="331"/>
         </scene>
         <!--Order Detail Table View Controller-->
         <scene sceneID="jEz-aY-aVD">
@@ -491,7 +478,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pfb-3k-lYW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1633" y="507"/>
+            <point key="canvasLocation" x="1606" y="330"/>
         </scene>
     </scenes>
     <resources>

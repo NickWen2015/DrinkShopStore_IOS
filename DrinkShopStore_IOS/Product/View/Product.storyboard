@@ -205,24 +205,30 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drink_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="cHv-kH-umq" userLabel="Product Image  View">
-                                                    <rect key="frame" x="15" y="10.5" width="85" height="85"/>
+                                                    <rect key="frame" x="15" y="10.5" width="80" height="80"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="85" id="eiE-gg-Cqm"/>
-                                                        <constraint firstAttribute="width" constant="85" id="ypE-Q6-wTm"/>
+                                                        <constraint firstAttribute="height" constant="80" id="eiE-gg-Cqm"/>
+                                                        <constraint firstAttribute="width" constant="80" id="ypE-Q6-wTm"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0y0-fr-dXJ">
-                                                    <rect key="frame" x="80" y="62" width="20" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="camera icon" image="camera_btn.png"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0y0-fr-dXJ">
+                                                    <rect key="frame" x="15" y="10.5" width="85" height="85"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="85" id="VPM-JY-qRq"/>
+                                                        <constraint firstAttribute="width" constant="85" id="YC4-vX-7dC"/>
+                                                    </constraints>
+                                                    <state key="normal" title="camera icon" image="Group"/>
                                                     <connections>
-                                                        <action selector="pickPictureBtnPressed:" destination="84g-h2-0V8" eventType="touchUpInside" id="dKh-aG-6Cq"/>
+                                                        <action selector="pickPictureBtnPressed:" destination="84g-h2-0V8" eventType="touchUpInside" id="JHx-fT-wcU"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="cHv-kH-umq" firstAttribute="top" secondItem="zTA-0H-nXg" secondAttribute="top" constant="10" id="7kY-CJ-NSY"/>
+                                                <constraint firstItem="0y0-fr-dXJ" firstAttribute="leading" secondItem="zTA-0H-nXg" secondAttribute="leading" constant="15" id="JeF-5Y-NzY"/>
+                                                <constraint firstItem="0y0-fr-dXJ" firstAttribute="top" secondItem="zTA-0H-nXg" secondAttribute="top" constant="10" id="MMq-cz-GlB"/>
                                                 <constraint firstAttribute="bottom" secondItem="cHv-kH-umq" secondAttribute="bottom" constant="10" id="dSJ-3D-r1P"/>
+                                                <constraint firstAttribute="bottom" secondItem="0y0-fr-dXJ" secondAttribute="bottom" constant="10" id="olh-U9-RYv"/>
                                                 <constraint firstItem="cHv-kH-umq" firstAttribute="leading" secondItem="zTA-0H-nXg" secondAttribute="leading" constant="15" id="ttC-hC-B9a"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -336,7 +342,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera_btn.png" width="64" height="64"/>
+        <image name="Group" width="70" height="80"/>
         <image name="drink_default.png" width="90" height="90"/>
         <image name="product" width="37.5" height="37.5"/>
         <image name="product_selected" width="37.5" height="37.5"/>

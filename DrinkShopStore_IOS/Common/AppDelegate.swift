@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Ask user's authorization.取得user同意
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { (grant, error) in
+        center.requestAuthorization(options: [.alert, .sound]) { (grant, error) in
             if let error = error {
                 print("Fail to requestAuthorization: \(error)")
                 return

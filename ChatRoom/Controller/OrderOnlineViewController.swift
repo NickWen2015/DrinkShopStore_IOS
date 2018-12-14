@@ -28,6 +28,11 @@ class OrderOnlineViewController: UIViewController, UIImagePickerControllerDelega
     var userName = "drinkShop客服人員"
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 加上手勢按鈕
+        let tap = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
+        view.addGestureRecognizer(tap)
+        
         //取得user授權
         PHPhotoLibrary.requestAuthorization { (status) in
             print("PHPhotoLibrary.requestAuthorization: \(status.rawValue)")
@@ -43,6 +48,11 @@ class OrderOnlineViewController: UIViewController, UIImagePickerControllerDelega
         }
        
     }
+    
+    @objc func closeKeyboard() {
+        self.view.endEditing(true)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

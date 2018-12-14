@@ -220,6 +220,7 @@
                                                     <state key="normal" title="camera icon" image="Group"/>
                                                     <connections>
                                                         <action selector="pickPictureBtnPressed:" destination="84g-h2-0V8" eventType="touchUpInside" id="JHx-fT-wcU"/>
+                                                        <action selector="textFieldBeginEditing:" destination="84g-h2-0V8" eventType="touchUpInside" id="GGc-yA-iWz"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

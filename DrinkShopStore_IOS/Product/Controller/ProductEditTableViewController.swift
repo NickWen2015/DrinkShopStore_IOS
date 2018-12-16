@@ -29,12 +29,16 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
     
     let communicator = Communicator.shared
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateSaveButtonState()
         
-        categoryNames = [""]
+        
+        //categoryNames = [""]
+        self.categoryNames = [] as! [String]
+        
         
         communicator.getAllCategory { (result, error) in
             if let error = error {
@@ -146,7 +150,10 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
             alert.addAction(ok)
             self.present(alert, animated: true)
             
+            self.categoryNameField.text = categoryNameAdd.text
+            
             self.viewDidLoad()
+            
             
         }
         alert.addAction(cancel)

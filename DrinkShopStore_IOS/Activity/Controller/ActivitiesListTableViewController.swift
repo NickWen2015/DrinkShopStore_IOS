@@ -82,9 +82,7 @@ class ActivitiesListTableViewController: UITableViewController {
                 self.newsEDateArray.append(newsEDate)
               
             }
-            
-            
-            
+
             for newsItem in resultObject {
                 let newsId = newsItem.id
                 
@@ -94,6 +92,12 @@ class ActivitiesListTableViewController: UITableViewController {
                 self.newsTableView.reloadData()
             }
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        newsIdArray.removeAll()
+        newsArray = [NewsItem]()
+
     }
     
     @IBAction func goBackFromAddNews(segue: UIStoryboardSegue) {
@@ -130,11 +134,13 @@ class ActivitiesListTableViewController: UITableViewController {
                     
                     cell.activityImage.image = UIImage(data: data)
                     
+                    let name = self.newsArray[indexPath.row].name
+                    
+                    cell.activityNameLabel.text = name
+                    cell.activitySDateLabel.text = self.newsArray[indexPath.row].sDate
+                    cell.activityEDateLabel.text = self.newsArray[indexPath.row].eDate
+                    
                 }
-                
-                cell.activityNameLabel.text = self.newsNameArray[indexPath.row]
-                cell.activitySDateLabel.text = self.newsSDateArray[indexPath.row]
-                cell.activityEDateLabel.text = self.newsEDateArray[indexPath.row]
                 
             }
         }

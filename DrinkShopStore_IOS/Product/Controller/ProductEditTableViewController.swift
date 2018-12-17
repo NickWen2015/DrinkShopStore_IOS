@@ -150,9 +150,12 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
             alert.addAction(ok)
             self.present(alert, animated: true)
             
-            self.categoryNameField.text = categoryNameAdd.text
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.viewDidLoad()
+            }
             
-            self.viewDidLoad()
+            
             
             
         }

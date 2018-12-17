@@ -34,8 +34,7 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
         super.viewDidLoad()
         
         updateSaveButtonState()
-        
-        
+
         //categoryNames = [""]
         self.categoryNames = [] as! [String]
         
@@ -142,6 +141,8 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
                     print("Insert categoryNameAdd fail: \(error)")
                     return
                 }
+                
+                self.viewDidLoad()
             }
             
             // Show Alert with content.
@@ -150,10 +151,9 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
             alert.addAction(ok)
             self.present(alert, animated: true)
             
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.viewDidLoad()
-            }
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
             
             
             
@@ -162,6 +162,8 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
         alert.addAction(cancel)
         alert.addAction(ok)
         self.present(alert, animated: true)
+        
+      
         
     }
     

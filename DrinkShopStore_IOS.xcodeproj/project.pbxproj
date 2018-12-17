@@ -667,6 +667,7 @@
 			baseConfigurationReference = B759144AEEAACC6CD3303417 /* Pods-DrinkShopStore_IOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DrinkShopStore_IOS/DrinkShopStore_IOS.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = PY8GD98FSY;
 				INFOPLIST_FILE = DrinkShopStore_IOS/Info.plist;
@@ -687,6 +688,7 @@
 			baseConfigurationReference = CCBC2FD3C2F8D202A05664A8 /* Pods-DrinkShopStore_IOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DrinkShopStore_IOS/DrinkShopStore_IOS.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DrinkShopStore_IOS/Info.plist;

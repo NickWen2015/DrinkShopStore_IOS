@@ -155,8 +155,10 @@ class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputOb
                 print("ERROR: orderId is nil")
                 return
             }
+
             // 將orderDetailId放在下一頁
             orderDetailVC.orderId = "\(orderId)"
+            orderDetailVC.order = orderDetailDisplay
             
         }
     }

@@ -24,7 +24,7 @@ struct Order: Codable {
     var orderStatus: String?
     var orderDetailList: [OrderDetail]?
     //var orderDetailList: List<OrderDetail>?
-    
+    var coupon_discount: Double = 10.0
     // 訂單資訊(額外欄位)
     var invoice: String?
 //    private String store_name;

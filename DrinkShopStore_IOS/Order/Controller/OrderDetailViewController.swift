@@ -11,6 +11,7 @@ import UIKit
 class OrderDetailViewController: UIViewController, UINavigationControllerDelegate {
     var orderDetailTableViewController: OrderDetailTableViewController!
     var orderId: String!
+    var order: Order!
     
     @IBOutlet weak var orderDetailIdLabel: UILabel!
     
@@ -22,7 +23,7 @@ class OrderDetailViewController: UIViewController, UINavigationControllerDelegat
         
         let controller = self.children.first as? OrderDetailTableViewController
         controller?.orderId = orderId
-        
+        controller?.order = order
         // Do any additional setup after loading the view.
     }
     

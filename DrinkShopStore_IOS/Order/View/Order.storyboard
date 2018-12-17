@@ -69,7 +69,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="ioh-uB-D2B"/>
+                        <viewLayoutGuide key="safeArea" id="vQs-q1-w6e"/>
                     </view>
                     <navigationItem key="navigationItem" id="Iid-N8-qMR">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="HL5-im-zZk">
@@ -100,10 +100,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="D1V-5j-ALh">
-                            <rect key="frame" x="0.0" y="228" width="375" height="195"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="orderCell" rowHeight="200" id="eGp-L6-bGq" customClass="OrderTableViewCell" customModule="DrinkShopStore_IOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="200"/>
@@ -221,7 +217,7 @@
         <!--Order Detail View Controller-->
         <scene sceneID="FSg-ER-70J">
             <objects>
-                <viewController id="Yxd-mH-Cuc" customClass="OrderDetailViewController" customModule="DrinkShopStore_IOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Yxd-mH-Cuc" customClass="OrderDetailViewController" customModule="DrinkShopStore_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zr3-B9-HFP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -234,7 +230,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sac-cx-4cu">
-                                <rect key="frame" x="58" y="170" width="260" height="390"/>
+                                <rect key="frame" x="58" y="170" width="260" height="422"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="k2e-XC-yVk" kind="embed" id="DCi-QJ-uhk"/>
@@ -256,7 +252,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Y0O-J0-RTy"/>
+                        <viewLayoutGuide key="safeArea" id="VeS-3W-OFD"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="XmX-N4-gt6"/>
@@ -267,17 +263,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyU-mr-CFJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="887" y="331"/>
+            <point key="canvasLocation" x="885.60000000000002" y="330.58470764617692"/>
         </scene>
         <!--Order Detail Table View Controller-->
         <scene sceneID="jEz-aY-aVD">
             <objects>
                 <tableViewController id="k2e-XC-yVk" customClass="OrderDetailTableViewController" customModule="DrinkShopStore_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7Un-eC-fdv">
-                        <rect key="frame" x="0.0" y="0.0" width="260" height="390"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="422"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="dlp-f3-1Jd">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="dlp-f3-1Jd">
                             <rect key="frame" x="0.0" y="189" width="260" height="118"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>

@@ -36,7 +36,7 @@ class ActivitiesListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+          newsArray = [NewsItem]()
         //啟用 navigation 導覽列上的編輯 tableView 鈕
         navigationItem.leftBarButtonItem = editButtonItem
         
@@ -96,13 +96,13 @@ class ActivitiesListTableViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         newsIdArray.removeAll()
-        newsArray = [NewsItem]()
+   
 
     }
     
     @IBAction func goBackFromAddNews(segue: UIStoryboardSegue) {
         
-        viewDidLoad()
+        self.viewDidLoad()
     }
     
     

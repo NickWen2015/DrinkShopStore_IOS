@@ -327,14 +327,14 @@ class ProductEditTableViewController: UITableViewController, UIImagePickerContro
     
     @IBAction func pickPictureBtnPressed(_ sender: Any) {
         closeKeyboard()
-        let alert = UIAlertController(title: "Please choose source:", message: nil, preferredStyle: .actionSheet)
-        let camera = UIAlertAction(title: "Camera", style: .default) { (action) in
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let camera = UIAlertAction(title: "相機", style: .default) { (action) in
             self.launchPicker(source: .camera)
         }
-        let library = UIAlertAction(title: "Photo library", style: .default) { (action) in
+        let library = UIAlertAction(title: "選擇相片", style: .default) { (action) in
             self.launchPicker(source: .photoLibrary)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: "取消", style: .cancel)
         alert.addAction(camera)
         alert.addAction(library)
         alert.addAction(cancel)

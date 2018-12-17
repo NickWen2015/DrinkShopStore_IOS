@@ -149,9 +149,9 @@ class ActivitiesListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
-        
+
     }
-    
+
     
     @IBAction func unwindToList(_ segue: UIStoryboardSegue) {
     }
@@ -164,9 +164,9 @@ class ActivitiesListTableViewController: UITableViewController {
             let id = newsIdArray[indexPath.row]
             newsIdArray.remove(at: indexPath.row) //先砍資料再砍畫面
             
-            let activityName = newsNameArray[indexPath.row]
-            let activitySDate = newsSDateArray[indexPath.row]
-            let activityEDate = newsEDateArray[indexPath.row]
+            let activityName = newsArray[indexPath.row].name
+            let activitySDate = newsArray[indexPath.row].sDate
+            let activityEDate = newsArray[indexPath.row].eDate
             let newsItem = NewsItem(id: id, name: activityName, sDate: activitySDate, eDate: activityEDate)
             
             

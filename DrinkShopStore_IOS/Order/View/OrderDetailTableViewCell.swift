@@ -16,6 +16,9 @@ class OrderDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var sizeNameLabel: UILabel!
     @IBOutlet weak var productQuantityLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet weak var PriceAndQuantityLabel: UILabel!
+    
+   
     
    
     var orderDetailList: OrderDetail? {
@@ -27,6 +30,7 @@ class OrderDetailTableViewCell: UITableViewCell {
             sizeNameLabel.text = orderDetailList!.getSizeName()
             productPriceLabel.text = String(orderDetailList!.getProductPrice())
             productQuantityLabel.text = String(orderDetailList!.getProductQuantity())
+            PriceAndQuantityLabel.text = String((orderDetailList!.getProductPrice()) * (orderDetailList!.getProductQuantity()))
       
         }
     }

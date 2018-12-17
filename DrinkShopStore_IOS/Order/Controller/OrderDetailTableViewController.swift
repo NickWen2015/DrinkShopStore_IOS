@@ -16,6 +16,16 @@ class OrderDetailTableViewController: UITableViewController {
     @IBOutlet weak var totalQuantityLabel: UILabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
     
+    @IBOutlet weak var couponDiscountLabel: UILabel!
+    
+    @IBOutlet weak var totalAmountDiscountLabel: UILabel!
+    
+    @IBOutlet weak var couponDiscountNameLabel: UILabel!
+    
+    @IBOutlet weak var totalAmountDiscountNameLabel: UILabel!
+    
+    @IBOutlet weak var lineLabel: UILabel!
+    
     //@IBOutlet weak var orderDetailIdTextLabel: UILabel!
     static let shared = OrderDetailTableViewController()
     
@@ -76,8 +86,9 @@ class OrderDetailTableViewController: UITableViewController {
             if couponId == 0 {
                 for orderDetail in self.orderDetails {
                     self.price = orderDetail.productPrice
-                    self.prices.append(self.price!)
                     self.qty = orderDetail.productQuantity
+                    //self.prices.append(self.price!)
+                    self.prices.append(self.price! * self.qty!)
                     self.qtys.append(self.qty!)
                     let totalCap: Int = self.qtys.reduce(0) { $0 + $1 }
                     let totalAmount: Int = self.prices.reduce(0) { $0 + $1 }
@@ -118,8 +129,9 @@ class OrderDetailTableViewController: UITableViewController {
                 
                 for orderDetail in self.orderDetails {
                     self.price = orderDetail.productPrice
-                    self.prices.append(self.price!)
                     self.qty = orderDetail.productQuantity
+                    //self.prices.append(self.price!)
+                    self.prices.append(self.price! * self.qty!)
                     self.qtys.append(self.qty!)
                     
                     let totalCap: Int = self.qtys.reduce(0) { $0 + $1 }
@@ -129,8 +141,22 @@ class OrderDetailTableViewController: UITableViewController {
                     self.totalQuantityLabel.text = String(totalCap)
                     
                     let couponDiscount = self.coupon.coupon_discount * 0.1
-                    let total = Double(totalAmount) * couponDiscount
-                    self.totalAmountLabel.text = String(Int(total))
+                    let totalAmountDiscount = Double(totalAmount) * couponDiscount
+//                    self.totalAmountLabel.text = String(Int(totalAmountDiscount))
+                    self.totalAmountLabel.text = String(totalAmount)
+                    let couponDiscountValue = totalAmount - Int(totalAmountDiscount)
+//                    self.couponDiscountLabel.text = "(\(couponDiscount * 10)折) -\(couponDiscountValue)"                    
+                    let couponDiscountToString = String(couponDiscount * 10)
+                    self.couponDiscountLabel.text = "(\(couponDiscountToString.prefix(3))折) -\(couponDiscountValue)"
+                    
+                    self.totalAmountDiscountLabel.text = String(Int(totalAmountDiscount))
+                    
+                    if self.couponDiscountLabel.text != nil {
+                        
+                        self.lineLabel.isHidden = false
+                        self.couponDiscountNameLabel.isHidden = false
+                        self.totalAmountDiscountNameLabel.isHidden = false
+                    }
                     
                 }
                 DispatchQueue.main.async {
@@ -138,9 +164,10 @@ class OrderDetailTableViewController: UITableViewController {
                 }
                 
             }
-            //
+            
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

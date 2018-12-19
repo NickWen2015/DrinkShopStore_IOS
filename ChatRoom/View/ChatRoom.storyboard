@@ -18,65 +18,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvd-fg-ZTh" customClass="ChatView" customModule="DrinkShopStore_IOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="445"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="510"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhi-E7-IsC">
-                                <rect key="frame" x="7" y="555" width="62" height="30"/>
-                                <state key="normal" title="發送訊息"/>
-                                <connections>
-                                    <action selector="sendTextBtnPressed:" destination="ADa-JF-0q6" eventType="touchUpInside" id="egE-e0-5kA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n55-SI-MIm">
-                                <rect key="frame" x="85" y="555" width="62" height="30"/>
-                                <state key="normal" title="上傳圖片"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n55-SI-MIm">
+                                <rect key="frame" x="8" y="582" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="P7A-0O-a3e"/>
+                                    <constraint firstAttribute="height" constant="28" id="l34-u3-Q7D"/>
+                                </constraints>
+                                <state key="normal" title="上傳圖片" image="camera"/>
                                 <connections>
                                     <action selector="sendPhotoBtnPressed:" destination="ADa-JF-0q6" eventType="touchUpInside" id="WzJ-09-cx7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASy-wC-ue5">
-                                <rect key="frame" x="306" y="555" width="62" height="30"/>
-                                <state key="normal" title="重新整理"/>
-                                <connections>
-                                    <action selector="refreshBtnPressed:" destination="ADa-JF-0q6" eventType="touchUpInside" id="aOd-9F-Wzf"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ftB-Ya-7m6">
-                                <rect key="frame" x="7" y="517" width="361" height="30"/>
+                                <rect key="frame" x="44" y="582" width="287" height="28"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhi-E7-IsC">
+                                <rect key="frame" x="339" y="582" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="f19-mE-cUM"/>
+                                    <constraint firstAttribute="width" constant="28" id="t31-e7-5Oh"/>
+                                </constraints>
+                                <state key="normal" title="發送訊息" image="send"/>
+                                <connections>
+                                    <action selector="sendTextBtnPressed:" destination="ADa-JF-0q6" eventType="touchUpInside" id="egE-e0-5kA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="n55-SI-MIm" firstAttribute="leading" secondItem="Hln-1a-C9r" secondAttribute="leading" constant="8" id="2KP-rb-JsI"/>
+                            <constraint firstItem="Hln-1a-C9r" firstAttribute="trailing" secondItem="qhi-E7-IsC" secondAttribute="trailing" constant="8" id="2vl-az-WCb"/>
                             <constraint firstItem="pvd-fg-ZTh" firstAttribute="trailing" secondItem="Hln-1a-C9r" secondAttribute="trailing" id="8Wa-UI-Dgi"/>
-                            <constraint firstItem="n55-SI-MIm" firstAttribute="leading" secondItem="qhi-E7-IsC" secondAttribute="trailing" constant="16" id="EGX-fB-s9g"/>
-                            <constraint firstItem="qhi-E7-IsC" firstAttribute="top" secondItem="ftB-Ya-7m6" secondAttribute="bottom" constant="8" symbolic="YES" id="KyK-Uf-zVD"/>
+                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="leading" secondItem="n55-SI-MIm" secondAttribute="trailing" constant="8" id="LlJ-GN-TnB"/>
                             <constraint firstItem="pvd-fg-ZTh" firstAttribute="leading" secondItem="Hln-1a-C9r" secondAttribute="leading" id="M5q-XS-Hcs"/>
-                            <constraint firstAttribute="bottom" secondItem="ftB-Ya-7m6" secondAttribute="bottom" constant="120" id="QU3-o4-nsD"/>
-                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="leading" secondItem="Hln-1a-C9r" secondAttribute="leading" constant="7" id="Vid-4I-QnG"/>
-                            <constraint firstItem="n55-SI-MIm" firstAttribute="top" secondItem="ftB-Ya-7m6" secondAttribute="bottom" constant="8" symbolic="YES" id="X2c-M1-Irx"/>
-                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="trailing" secondItem="ASy-wC-ue5" secondAttribute="trailing" id="eOG-fD-CcU"/>
-                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="centerX" secondItem="pvd-fg-ZTh" secondAttribute="centerX" id="hOU-n9-jhi"/>
+                            <constraint firstItem="qhi-E7-IsC" firstAttribute="top" secondItem="pvd-fg-ZTh" secondAttribute="bottom" constant="8" id="O57-pj-WMj"/>
+                            <constraint firstItem="Hln-1a-C9r" firstAttribute="bottom" secondItem="qhi-E7-IsC" secondAttribute="bottom" constant="8" id="a3s-V8-bbc"/>
+                            <constraint firstItem="qhi-E7-IsC" firstAttribute="leading" secondItem="ftB-Ya-7m6" secondAttribute="trailing" constant="8" id="eeO-16-OJ3"/>
+                            <constraint firstItem="Hln-1a-C9r" firstAttribute="bottom" secondItem="ftB-Ya-7m6" secondAttribute="bottom" constant="8" id="g8u-vo-vYp"/>
+                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="top" secondItem="pvd-fg-ZTh" secondAttribute="bottom" constant="8" id="go4-GG-uwp"/>
                             <constraint firstItem="pvd-fg-ZTh" firstAttribute="top" secondItem="Hln-1a-C9r" secondAttribute="top" id="iGp-0U-dil"/>
-                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="leading" secondItem="qhi-E7-IsC" secondAttribute="leading" id="ikg-eF-H1B"/>
-                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="top" secondItem="pvd-fg-ZTh" secondAttribute="bottom" constant="8" id="oT8-pp-a0C"/>
-                            <constraint firstItem="ASy-wC-ue5" firstAttribute="top" secondItem="ftB-Ya-7m6" secondAttribute="bottom" constant="8" symbolic="YES" id="vx9-qE-KVO"/>
+                            <constraint firstItem="ftB-Ya-7m6" firstAttribute="leading" secondItem="n55-SI-MIm" secondAttribute="trailing" constant="8" id="klE-l8-U13"/>
+                            <constraint firstItem="qhi-E7-IsC" firstAttribute="leading" secondItem="ftB-Ya-7m6" secondAttribute="trailing" constant="8" id="oVg-Zu-q7u"/>
+                            <constraint firstItem="Hln-1a-C9r" firstAttribute="bottom" secondItem="n55-SI-MIm" secondAttribute="bottom" constant="8" id="rtf-mT-2aJ"/>
+                            <constraint firstItem="n55-SI-MIm" firstAttribute="top" secondItem="pvd-fg-ZTh" secondAttribute="bottom" constant="8" id="yec-r8-lXR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hln-1a-C9r"/>
                     </view>
                     <navigationItem key="navigationItem" title="即時服務" id="LvW-ce-txx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="V9T-DR-e0X">
+                        <barButtonItem key="rightBarButtonItem" image="refresh" id="y89-a6-yMR">
                             <connections>
-                                <action selector="doneBarBtnPressed:" destination="ADa-JF-0q6" id="xyf-zo-Nj9"/>
+                                <action selector="refreshBtnPressed:" destination="ADa-JF-0q6" id="1e7-l6-SWq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="chatView" destination="pvd-fg-ZTh" id="JRv-Ru-961"/>
                         <outlet property="inputTextField" destination="ftB-Ya-7m6" id="ooU-YO-yvb"/>
-                        <outlet property="refreshBtn" destination="ASy-wC-ue5" id="EJA-4x-6iG"/>
+                        <outlet property="refreshBtn" destination="y89-a6-yMR" id="TGg-XF-gzn"/>
                         <outlet property="sendMsgBtn" destination="qhi-E7-IsC" id="Mgr-6A-CPr"/>
                         <outlet property="sendPhotoBtn" destination="n55-SI-MIm" id="xse-yp-s2Q"/>
                     </connections>
@@ -110,6 +113,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" width="200.34782409667969" height="200.34782409667969"/>
         <image name="orderonline" width="37.5" height="37.5"/>
+        <image name="refresh" width="72" height="72"/>
+        <image name="send" width="200.34782409667969" height="200.34782409667969"/>
     </resources>
 </document>

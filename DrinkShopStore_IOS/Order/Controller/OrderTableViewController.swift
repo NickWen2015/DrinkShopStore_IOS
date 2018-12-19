@@ -51,8 +51,8 @@ class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputOb
 
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
      
         // 準備資料
         communicator.getAllOrder { (result, error) in

@@ -203,7 +203,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="訂單管理" id="qVR-u1-Ns8">
-                        <barButtonItem key="rightBarButtonItem" title="Scan QR Code" id="fOc-fZ-iXe">
+                        <barButtonItem key="rightBarButtonItem" title="Scan QR Code" image="qr code" id="fOc-fZ-iXe">
                             <connections>
                                 <segue destination="h8b-mu-v4k" kind="presentation" id="Q2F-XW-ffA"/>
                             </connections>
@@ -540,5 +540,6 @@
     <resources>
         <image name="order" width="37.5" height="37.5"/>
         <image name="order_selected" width="37.5" height="37.5"/>
+        <image name="qr code" width="30" height="30"/>
     </resources>
 </document>

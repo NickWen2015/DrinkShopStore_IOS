@@ -52,6 +52,8 @@ class OrderTableViewController: UITableViewController, AVCaptureMetadataOutputOb
     }
     
     override func viewWillAppear(_ animated: Bool) {
+
+
         super.viewWillAppear(animated)
      
         // 準備資料
